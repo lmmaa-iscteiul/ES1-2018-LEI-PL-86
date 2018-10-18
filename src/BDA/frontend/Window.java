@@ -1,6 +1,8 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.*;
@@ -10,8 +12,8 @@ import backend.Message;
 public class Window {
 
 	public static final Window WINDOW_INSTANCE = new Window();
-	private JPanel left_pane;
-	private JPanel right_pane;
+	private JPanel right_panel;
+	private JPanel left_panel;
 	private JFrame frame;
 	private JList message_list;
 	private JButton button_new;
@@ -25,25 +27,27 @@ public class Window {
 		this.scroll = new JScrollPane(message_list);
 		this.button_new = new JButton("NEW");
 		this.button_sinchronize = new JButton("SYNCHRONIZE");
-		this.left_pane = new JPanel();
-		this.right_pane = new JPanel();
+		this.right_panel = new JPanel();
+		this.left_panel = new JPanel();
 		this.title = new JTextField("BOM DIA ACADEMIA");
 	}
 
 	public void start_window() {
 
-		frame.setLayout(new BorderLayout());
-		frame.add(left_pane, BorderLayout.WEST);
-		frame.add(right_pane, BorderLayout.EAST);
-		left_pane.setLayout(new GridLayout(5, 0));
+		frame.setLayout(new GridLayout(0, 2));
+		frame.add(left_panel);
+		frame.add(right_panel);
+		left_panel.setLayout(new GridLayout(5, 0));
+		right_panel.setLayout(new GridLayout(1, 1));
 		title.setEditable(false);
-		left_pane.add(title);
-		right_pane.add(scroll);
-		left_pane.add(button_new);
-		left_pane.add(button_sinchronize);
+		left_panel.add(title);
+		right_panel.add(scroll);
+		left_panel.add(button_new);
+		left_panel.add(button_sinchronize);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
+		frame.setResizable(true);
 		frame.setVisible(true);
+		frame.pack();
 	}
 
 	public static Window get_window_instance() {
