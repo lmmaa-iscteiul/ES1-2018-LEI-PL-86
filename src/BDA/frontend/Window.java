@@ -47,7 +47,7 @@ public class Window {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 		frame.setVisible(true);
-		frame.pack();
+//		frame.pack();
 	}
 
 	public static Window get_window_instance() {
