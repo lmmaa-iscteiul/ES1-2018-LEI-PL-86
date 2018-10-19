@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -15,9 +17,10 @@ public class Window {
 
 	public static final Window WINDOW_INSTANCE = new Window();
 	private final int MESSAGE = 1;
-	private final int KIND = 2;
+	private final int TYPE = 2;
 	private final int SENDER = 3;
 	private final int SOURCE = 4;
+	private List<Message> message_list;
 	private JPanel right_panel;
 	private JPanel left_panel;
 	private JFrame frame;
@@ -30,6 +33,7 @@ public class Window {
 
 	public Window() {
 		this.frame = new JFrame();
+		this.message_list = new LinkedList<Message>();
 		this.dataModel = new AbstractTableModel() {
 			public int getColumnCount() {
 				return 4;
@@ -40,7 +44,7 @@ public class Window {
 			}
 
 			public Object getValueAt(int row, int col) {
-				return ;
+				return message;
 			}
 		};
 		this.table = new JTable(dataModel);
