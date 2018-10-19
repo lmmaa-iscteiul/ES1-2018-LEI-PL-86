@@ -6,25 +6,45 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 import backend.Message;
 
 public class Window {
 
 	public static final Window WINDOW_INSTANCE = new Window();
+	private final int MESSAGE = 1;
+	private final int KIND = 2;
+	private final int SENDER = 3;
+	private final int SOURCE = 4;
 	private JPanel right_panel;
 	private JPanel left_panel;
 	private JFrame frame;
-	private JList message_list;
+	private JTable table;
 	private JButton button_new;
 	private JButton button_sinchronize;
 	private JScrollPane scroll;
 	private JTextField title;
+	private TableModel dataModel;
 
 	public Window() {
 		this.frame = new JFrame();
-		this.message_list = new JList<String>();
-		this.scroll = new JScrollPane(message_list);
+		this.dataModel = new AbstractTableModel() {
+			public int getColumnCount() {
+				return 4;
+			}
+
+			public int getRowCount() {
+				return 10000;
+			}
+
+			public Object getValueAt(int row, int col) {
+				return ;
+			}
+		};
+		this.table = new JTable(dataModel);
+		this.scroll = new JScrollPane(table);
 		this.button_new = new JButton("NEW");
 		this.button_sinchronize = new JButton("SYNCHRONIZE");
 		this.right_panel = new JPanel();
@@ -48,6 +68,7 @@ public class Window {
 		frame.setResizable(true);
 		frame.setVisible(true);
 		frame.pack();
+		dataModel.setValueAt("this is a message", MESSAGE, 1);
 	}
 
 	public static Window get_window_instance() {
