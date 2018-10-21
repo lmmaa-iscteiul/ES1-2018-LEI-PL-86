@@ -2,58 +2,48 @@ package frontend;
 
 public class Table_line {
 
-	private String MESSAGE;
-	private String TYPE;
-	private String SENDER;
-	private String SOURCE;
-	private int row;
+	private String message;
+	private String type;
+	private String sender;
+	private String source;
 
-	public String getMESSAGE() {
-		return MESSAGE;
+	public Table_line(String message, String type, String sender, String source) {
+		this.message = message;
+		this.type = type;
+		this.sender = sender;
+		this.source = source;
 	}
 
-	public void setMESSAGE(String mESSAGE) {
-		MESSAGE = mESSAGE;
+	public String getMessage() {
+		return message;
 	}
 
-	public String getTYPE() {
-		return TYPE;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public void setTYPE(String tYPE) {
-		TYPE = tYPE;
+	public String getType() {
+		return type;
 	}
 
-	public String getSENDER() {
-		return SENDER;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public void setSENDER(String sENDER) {
-		SENDER = sENDER;
+	public String getSender() {
+		return sender;
 	}
 
-	public String getSOURCE() {
-		return SOURCE;
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 
-	public void setSOURCE(String sOURCE) {
-		SOURCE = sOURCE;
+	public String getSource() {
+		return source;
 	}
 
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public Table_line(String message, String type, String sender, String source, int row) {
-		this.MESSAGE = message;
-		this.TYPE = type;
-		this.SENDER = sender;
-		this.SOURCE = source;
-		this.row = row;
+	public void setSource(String source) {
+		this.source = source;
 	}
 
 }

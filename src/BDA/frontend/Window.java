@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class Window {
 
@@ -24,6 +24,7 @@ public class Window {
 	private JPanel titles_panel;
 	private JPanel sources_panel;
 	private JTable table;
+	private JTableHeader header;
 	private JButton button_new;
 	private JButton button_sinchronize;
 	private JCheckBox facebook;
@@ -33,12 +34,13 @@ public class Window {
 	private JLabel title;
 	private JLabel subtitle;
 	private JTextField tf;
-	private TableModel dataModel;
+	private DefaultTableModel dataModel;
+	private String[] Header = { "Message", "Type", "Sender", "Source" };
 	private String[][] messages = new String[50][100];
 
 	public Window() {
 
-		this.dataModel = new AbstractTableModel() {
+		this.dataModel = new DefaultTableModel(messages, Header) {
 			public int getColumnCount() {
 				return 4;
 			}
@@ -162,9 +164,9 @@ public class Window {
 		frame.pack();
 
 		// TABLE TESTE!
-		Table_line line = new Table_line("this is a message", "teste", "luis", "facebook", 0);
+		Table_line line = new Table_line("this is a message", "teste", "luis", "facebook");
 		fillTableRow(line);
-		Table_line line1 = new Table_line("this is a message1", "teste1", "pedro", "twitter", 0);
+		Table_line line1 = new Table_line("this is another", "informação", "pedro", "twitter");
 		fillTableRow(line1);
 
 	}
@@ -175,10 +177,24 @@ public class Window {
 
 	public void fillTableRow(Table_line line) {
 		int row = nextRowAvailable();
-		dataModel.setValueAt(line.getMESSAGE(), row, Table_columns.MESSAGE.getColumn());
-		dataModel.setValueAt(line.getTYPE(), row, Table_columns.TYPE.getColumn());
-		dataModel.setValueAt(line.getSENDER(), row, Table_columns.SENDER.getColumn());
-		dataModel.setValueAt(line.getSOURCE(), row, Table_columns.SOURCE.getColumn());
+		for (int i = 0; i < Header.length; i++) {
+			switch (dataModel.getColumnName(i)) {
+			case "Message":
+				dataModel.setValueAt(line.getMessage(), row, i);
+				break;
+			case "Type":
+				dataModel.setValueAt(line.getType(), row, i);
+				break;
+			case "Sender":
+				dataModel.setValueAt(line.getSender(), row, i);
+				break;
+			case "Source":
+				dataModel.setValueAt(line.getSource(), row, i);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	public int nextRowAvailable() {
