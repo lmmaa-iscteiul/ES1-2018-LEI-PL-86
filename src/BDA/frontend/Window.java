@@ -61,8 +61,6 @@ public class Window {
 				return message;
 			}
 		};
-		
-		this.table = new JTable(dataModel);
 	}
 
 	public void start_window() {
@@ -111,6 +109,7 @@ public class Window {
 		right_panel = new JPanel();
 		right_panel.setBorder(BorderFactory.createEmptyBorder(15,20,20,15));
 		
+		table = new JTable(dataModel);
 		scroll = new JScrollPane(table);
 		right_panel.add(scroll);	
 		
