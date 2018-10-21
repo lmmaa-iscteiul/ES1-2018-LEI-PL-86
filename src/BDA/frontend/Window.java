@@ -95,7 +95,7 @@ public class Window {
 		buttons_panel.add(button_sinchronize);
 		left_panel.add(buttons_panel);
 		
-		//Painel das checkboxes das fontes de informação no left_panel
+		//Painel das checkboxes das fontes de informaï¿½ï¿½o no left_panel
 		sources_panel = new JPanel();
 		sources_panel.setLayout(new GridLayout(3,1));
 		sources_panel.setBorder(BorderFactory.createEmptyBorder(50,0,0,0));

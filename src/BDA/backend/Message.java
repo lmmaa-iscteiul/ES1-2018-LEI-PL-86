@@ -13,5 +13,4 @@ public class Message {
 		this.SENDER = sender;
 		this.SOURCE = source;
 	}
-
 }
