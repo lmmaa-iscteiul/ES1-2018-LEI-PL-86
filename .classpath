@@ -3,5 +3,9 @@
 	<classpathentry kind="src" path="src/BDA"/>
 	<classpathentry kind="src" path="src/jUnitTests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/pmpir/Pictures/Docs/ISCTE/ES1/lib/twitter4j-async-4.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pmpir/Pictures/Docs/ISCTE/ES1/lib/twitter4j-core-4.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pmpir/Pictures/Docs/ISCTE/ES1/lib/twitter4j-examples-4.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pmpir/Pictures/Docs/ISCTE/ES1/lib/twitter4j-stream-4.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

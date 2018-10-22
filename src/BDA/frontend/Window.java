@@ -1,6 +1,8 @@
 package frontend;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import integration.TwitterApp;
 
 public class Window {
 
@@ -37,9 +41,12 @@ public class Window {
 	private DefaultTableModel dataModel;
 	private String[] Header = { "Message", "Type", "Sender", "Source" };
 	private String[][] messages = new String[50][100];
+	private TwitterApp twitter_app;
 
 	public Window() {
-
+		
+		this.twitter_app = new TwitterApp();
+		
 		this.dataModel = new DefaultTableModel(messages, Header) {
 			public int getColumnCount() {
 				return 4;
@@ -168,6 +175,14 @@ public class Window {
 		fillTableRow(line);
 		Table_line line1 = new Table_line("this is another", "informação", "pedro", "twitter");
 		fillTableRow(line1);
+		
+		//Teste dos tweets
+		List<Table_line> tweets = new ArrayList<Table_line>();
+		tweets = twitter_app.getTweets();
+		for(int i = 0; i < tweets.size(); i++){	
+			fillTableRow( tweets.get(i) );
+		}
+		
 
 	}
 
