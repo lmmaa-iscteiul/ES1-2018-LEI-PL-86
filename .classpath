@@ -3,6 +3,5 @@
 	<classpathentry kind="src" path="src/BDA"/>
 	<classpathentry kind="src" path="src/jUnitTests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/pmpir/.m2/repository/org/twitter4j/twitter4j-core/4.0.7/twitter4j-core-4.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
