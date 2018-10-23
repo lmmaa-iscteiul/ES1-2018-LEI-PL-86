@@ -1,6 +1,8 @@
 package frontend;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class Window {
 	private JTable table;
 	private JTableHeader header;
 	private JButton button_new;
-	private JButton button_sinchronize;
+	private JButton button_synchronize;
 	private JCheckBox facebook;
 	private JCheckBox gmail;
 	private JCheckBox twitter;
@@ -41,12 +43,13 @@ public class Window {
 	private DefaultTableModel dataModel;
 	private String[] Header = { "Message", "Type", "Sender", "Source" };
 	private String[][] messages = new String[50][100];
+	private List<String> selectedBoxes = new ArrayList<String>();
 	private TwitterApp twitter_app;
 
 	public Window() {
-
+		
 		this.twitter_app = new TwitterApp();
-
+		
 		this.dataModel = new DefaultTableModel(messages, Header) {
 			public int getColumnCount() {
 				return 4;
@@ -68,80 +71,70 @@ public class Window {
 	}
 
 	public void start_window() {
+		
 		frame = new JFrame("Bom Dia Academia");
 		frame.setLayout(new GridLayout(0, 2));
-
-		// left_panel
-		left_panel = new JPanel();
-		left_panel.setLayout(new GridLayout(5, 1));
-		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
-
-		this.table = new JTable(dataModel);
+		
 		// Titulo e subtitulo do left_panel
 		title = new JLabel("BOM DIA ACADEMIA");
-		subtitle = new JLabel("School Companion wut??");
+		subtitle = new JLabel("ISCTE");
 		titles_panel = new JPanel();
 		titles_panel.setLayout(new GridLayout(2, 1));
 		title.setFont(title.getFont().deriveFont(40.0f));
 		subtitle.setFont(subtitle.getFont().deriveFont(20, 25.6f));
 		titles_panel.add(title);
 		titles_panel.add(subtitle);
-		left_panel.add(titles_panel);
-
-		// Painel dos buttons no left_panel
-		button_new = new JButton("NEW");
-		button_sinchronize = new JButton("SYNCHRONIZE");
-		buttons_panel = new JPanel();
-		buttons_panel.setLayout(new GridLayout(2, 1));
-		buttons_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
-		buttons_panel.add(button_new);
-		buttons_panel.add(button_sinchronize);
-		left_panel.add(buttons_panel);
-
-		// Painel das checkboxes das fontes de informaï¿½ï¿½o no left_panel
-		sources_panel = new JPanel();
-		sources_panel.setLayout(new GridLayout(3, 1));
-		sources_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
-		facebook = new JCheckBox("Facebook");
-		gmail = new JCheckBox("Gmail");
-		twitter = new JCheckBox("Twitter");
-		sources_panel.add(facebook);
-		sources_panel.add(gmail);
-		sources_panel.add(twitter);
-		left_panel.add(sources_panel);
 
 		// right_panel
 		right_panel = new JPanel();
 		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
+		table = new JTable(dataModel);
 		scroll = new JScrollPane(table);
 		right_panel.add(scroll);
+		
 
 		// left_panel
 		left_panel = new JPanel();
 		left_panel.setLayout(new GridLayout(5, 1));
 		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
-		// Titulo e subtitulo do left_panel
-		title = new JLabel("BOM DIA ACADEMIA");
-		subtitle = new JLabel("School Companion wut??");
-		titles_panel = new JPanel();
-		titles_panel.setLayout(new GridLayout(2, 1));
-		title.setFont(title.getFont().deriveFont(40.0f));
-		subtitle.setFont(subtitle.getFont().deriveFont(20, 25.6f));
-		titles_panel.add(title);
-		titles_panel.add(subtitle);
-		left_panel.add(titles_panel);
 
 		// Painel dos buttons no left_panel
 		button_new = new JButton("NEW");
-		button_sinchronize = new JButton("SYNCHRONIZE");
+		button_synchronize = new JButton("SYNCHRONIZE");
 		buttons_panel = new JPanel();
 		buttons_panel.setLayout(new GridLayout(2, 1));
 		buttons_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
 		buttons_panel.add(button_new);
-		buttons_panel.add(button_sinchronize);
+		buttons_panel.add(button_synchronize);
 		left_panel.add(buttons_panel);
+		
+		button_synchronize.addActionListener(new ActionListener() {
+
+			@Override
+			public synchronized void actionPerformed(ActionEvent e) {
+				getSelectedBoxes();
+				for (int i = 0; i < selectedBoxes.size(); i++) {
+					switch (selectedBoxes.get(i)) {
+					case "gmail":
+						break;
+					case "facebook":
+						break;
+					case "twitter":
+//						List<Table_line> tweets = new ArrayList<Table_line>();
+//						tweets = twitter_app.getTweets();
+//						for (int j = 0; j < tweets.size(); j++)
+//							fillTableRow(tweets.get(j));
+						System.out.println("OIIIII boO");
+						break;
+					default:
+						break;
+					}
+				}
+
+			}
+		});
 
 		// Painel das checkboxes das fontes de informação no left_panel
 		sources_panel = new JPanel();
@@ -155,13 +148,6 @@ public class Window {
 		sources_panel.add(twitter);
 		left_panel.add(sources_panel);
 
-		// right_panel
-		right_panel = new JPanel();
-		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
-
-		table = new JTable(dataModel);
-		scroll = new JScrollPane(table);
-		right_panel.add(scroll);
 
 		frame.add(left_panel);
 		frame.add(right_panel);
@@ -169,19 +155,20 @@ public class Window {
 		frame.setResizable(true);
 		frame.setVisible(true);
 		frame.pack();
-
-		// TABLE TESTE!
-		Table_line line = new Table_line("this is a message", "teste", "luis", "facebook");
+		
+//		 TABLE TESTE!
+		Table_line line = new Table_line("triggered ", "testededed", "luis", "facebook");
 		fillTableRow(line);
-		Table_line line1 = new Table_line("this is another", "informação", "pedro", "twitter");
+		Table_line line1 = new Table_line("please work", "informação", "pedro", "twitter");
 		fillTableRow(line1);
-
-		// Teste dos tweets
+//		
+//		Teste dos tweets
 		List<Table_line> tweets = new ArrayList<Table_line>();
 		tweets = twitter_app.getTweets();
-		for (int i = 0; i < tweets.size(); i++) {
-			fillTableRow(tweets.get(i));
+		for(int i = 0; i < tweets.size(); i++){	
+			fillTableRow( tweets.get(i) );
 		}
+		
 
 	}
 
@@ -220,8 +207,19 @@ public class Window {
 		// não me lembro como fazer exit -.-
 		return (Integer) null;
 	}
+	
+	public List<String> getSelectedBoxes(){
+		if(facebook.isSelected())
+			selectedBoxes.add("facebook");
+		if(twitter.isSelected())
+			selectedBoxes.add("twitter");
+		if(gmail.isSelected())
+			selectedBoxes.add("gmail");
+		return selectedBoxes;
+	}
 
 	public static void main(String[] args) {
 		Window.get_window_instance().start_window();
 	}
+
 }
