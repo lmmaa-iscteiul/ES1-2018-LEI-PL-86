@@ -44,9 +44,9 @@ public class Window {
 	private TwitterApp twitter_app;
 
 	public Window() {
-		
+
 		this.twitter_app = new TwitterApp();
-		
+
 		this.dataModel = new DefaultTableModel(messages, Header) {
 			public int getColumnCount() {
 				return 4;
@@ -175,14 +175,13 @@ public class Window {
 		fillTableRow(line);
 		Table_line line1 = new Table_line("this is another", "informação", "pedro", "twitter");
 		fillTableRow(line1);
-		
-		//Teste dos tweets
+
+		// Teste dos tweets
 		List<Table_line> tweets = new ArrayList<Table_line>();
 		tweets = twitter_app.getTweets();
-		for(int i = 0; i < tweets.size(); i++){	
-			fillTableRow( tweets.get(i) );
+		for (int i = 0; i < tweets.size(); i++) {
+			fillTableRow(tweets.get(i));
 		}
-		
 
 	}
 
@@ -225,5 +224,4 @@ public class Window {
 	public static void main(String[] args) {
 		Window.get_window_instance().start_window();
 	}
-
 }
