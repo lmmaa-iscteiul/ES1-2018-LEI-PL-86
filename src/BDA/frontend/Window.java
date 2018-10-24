@@ -1,5 +1,6 @@
 package frontend;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import integration.TwitterApp;
 
@@ -30,7 +31,6 @@ public class Window {
 	private JPanel titles_panel;
 	private JPanel sources_panel;
 	private JTable table;
-	private JTableHeader header;
 	private JButton button_new;
 	private JButton button_synchronize;
 	private JCheckBox facebook;
@@ -39,18 +39,17 @@ public class Window {
 	private JScrollPane scroll;
 	private JLabel title;
 	private JLabel subtitle;
-	private JTextField tf;
 	private DefaultTableModel dataModel;
-	private String[] Header = { "Message", "Type", "Sender", "Source" };
+	private String[] header = { "Message", "Type", "Sender", "Source" };
 	private String[][] messages = new String[50][100];
 	private List<String> selectedBoxes = new ArrayList<String>();
 	private TwitterApp twitter_app;
 
 	public Window() {
-		
+
 		this.twitter_app = new TwitterApp();
-		
-		this.dataModel = new DefaultTableModel(messages, Header) {
+
+		this.dataModel = new DefaultTableModel(messages, header) {
 			public int getColumnCount() {
 				return 4;
 			}
@@ -71,10 +70,10 @@ public class Window {
 	}
 
 	public void start_window() {
-		
+
 		frame = new JFrame("Bom Dia Academia");
 		frame.setLayout(new GridLayout(0, 2));
-		
+
 		// Titulo e subtitulo do left_panel
 		title = new JLabel("BOM DIA ACADEMIA");
 		subtitle = new JLabel("ISCTE");
@@ -92,13 +91,12 @@ public class Window {
 		table = new JTable(dataModel);
 		scroll = new JScrollPane(table);
 		right_panel.add(scroll);
-		
+		setColumnsSize("Message");
 
 		// left_panel
 		left_panel = new JPanel();
 		left_panel.setLayout(new GridLayout(5, 1));
 		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
-
 
 		// Painel dos buttons no left_panel
 		button_new = new JButton("NEW");
@@ -108,10 +106,10 @@ public class Window {
 		buttons_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
 		buttons_panel.add(button_new);
 		buttons_panel.add(button_synchronize);
+		left_panel.add(titles_panel);
 		left_panel.add(buttons_panel);
-		
-		button_synchronize.addActionListener(new ActionListener() {
 
+		button_synchronize.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				getSelectedBoxes();
@@ -122,12 +120,12 @@ public class Window {
 					case "facebook":
 						break;
 					case "twitter":
-//						List<Table_line> tweets = new ArrayList<Table_line>();
-//						tweets = twitter_app.getTweets();
-//						for (int j = 0; j < tweets.size(); j++)
-//							fillTableRow(tweets.get(j));
-						System.out.println("OIIIII boO");
-						break;
+						List<Table_line> tweets = new ArrayList<Table_line>();
+						tweets = twitter_app.getTweets();
+						for (int j = 0; j < tweets.size(); j++) {
+							fillTableRow(tweets.get(j));
+						}
+						table.updateUI();
 					default:
 						break;
 					}
@@ -148,27 +146,27 @@ public class Window {
 		sources_panel.add(twitter);
 		left_panel.add(sources_panel);
 
-
 		frame.add(left_panel);
 		frame.add(right_panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 		frame.setVisible(true);
 		frame.pack();
-		
-//		 TABLE TESTE!
-		Table_line line = new Table_line("triggered ", "testededed", "luis", "facebook");
-		fillTableRow(line);
-		Table_line line1 = new Table_line("please work", "informação", "pedro", "twitter");
-		fillTableRow(line1);
-//		
-//		Teste dos tweets
-		List<Table_line> tweets = new ArrayList<Table_line>();
-		tweets = twitter_app.getTweets();
-		for(int i = 0; i < tweets.size(); i++){	
-			fillTableRow( tweets.get(i) );
-		}
-		
+
+		// // TABLE TESTE!
+		// Table_line line = new Table_line("triggered ", "testededed", "luis",
+		// "facebook");
+		// fillTableRow(line);
+		// Table_line line1 = new Table_line("please work", "informação", "pedro",
+		// "twitter");
+		// fillTableRow(line1);
+		// //
+		// // Teste dos tweets
+		// List<Table_line> tweets = new ArrayList<Table_line>();
+		// tweets = twitter_app.getTweets();
+		// for (int i = 0; i < tweets.size(); i++) {
+		// fillTableRow(tweets.get(i));
+		// }
 
 	}
 
@@ -178,7 +176,7 @@ public class Window {
 
 	public void fillTableRow(Table_line line) {
 		int row = nextRowAvailable();
-		for (int i = 0; i < Header.length; i++) {
+		for (int i = 0; i < header.length; i++) {
 			switch (dataModel.getColumnName(i)) {
 			case "Message":
 				dataModel.setValueAt(line.getMessage(), row, i);
@@ -207,15 +205,24 @@ public class Window {
 		// não me lembro como fazer exit -.-
 		return (Integer) null;
 	}
-	
-	public List<String> getSelectedBoxes(){
-		if(facebook.isSelected())
+
+	public List<String> getSelectedBoxes() {
+		if (facebook.isSelected())
 			selectedBoxes.add("facebook");
-		if(twitter.isSelected())
+		if (twitter.isSelected())
 			selectedBoxes.add("twitter");
-		if(gmail.isSelected())
+		if (gmail.isSelected())
 			selectedBoxes.add("gmail");
 		return selectedBoxes;
+	}
+
+	public void setColumnsSize(String Column) {
+		for (int i = 0; i < header.length; i++) {
+			if (dataModel.getColumnName(i) == Column) {
+				TableColumn tableColumn = table.getTableHeader().getColumnModel().getColumn(i);
+				tableColumn.setPreferredWidth(300);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
