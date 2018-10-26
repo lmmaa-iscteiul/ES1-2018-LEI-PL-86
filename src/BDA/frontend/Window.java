@@ -45,6 +45,12 @@ public class Window {
 	private List<String> selectedBoxes = new ArrayList<String>();
 	private TwitterApp twitter_app;
 
+	/**
+	 * Creates and initiates a TwitterApp instance named 'twitter_app'.
+	 * <p>The twitter_app gets the most recent ISCTE-IUL's tweets from their twitter account to the dataModel table.
+	 * <p>Creates and initiates a DefaultTableModel instance named 'dataModel'.
+	 * <p>The dataModel table displays the information about ISCTE-IUL to the user.
+	 */
 	public Window() {
 
 		this.twitter_app = new TwitterApp();
@@ -69,6 +75,9 @@ public class Window {
 		};
 	}
 
+	/**
+	 * Creates and shows the frame/window that the user will be seeing and interacting with.
+	 */
 	public void start_window() {
 
 		frame = new JFrame("Bom Dia Academia");
@@ -174,6 +183,11 @@ public class Window {
 		return WINDOW_INSTANCE;
 	}
 
+	/**
+	 * Fills the next available dataModel's row with a new message, along with its type, sender, and source.
+	 * <p> It gets the message's information it needs from the provided Table_line object 'line'.
+	 * @param line - the provided Table_line object.
+	 */
 	public void fillTableRow(Table_line line) {
 		int row = nextRowAvailable();
 		for (int i = 0; i < header.length; i++) {
@@ -195,7 +209,11 @@ public class Window {
 			}
 		}
 	}
-
+	
+	/**
+	 * Tells you which is the next available tableModel's row to add a new message to.
+	 * @return the next available row to add a new message to (as an integer); or returns null if the tableModel is full.
+	 */
 	public int nextRowAvailable() {
 		for (int i = 0; i < messages.length; i++) {
 			if (messages[i][0] == null) {
@@ -206,6 +224,10 @@ public class Window {
 		return (Integer) null;
 	}
 
+	/**
+	 * Checks which of the check boxes are selected, and returns a list of Strings with the names of those that are.
+	 * @return a list of Strings with the name of the check boxes that are selected.
+	 */
 	public List<String> getSelectedBoxes() {
 		if (facebook.isSelected())
 			selectedBoxes.add("facebook");
@@ -215,7 +237,12 @@ public class Window {
 			selectedBoxes.add("gmail");
 		return selectedBoxes;
 	}
-
+	
+	/**
+	 * If the given string (parameter "Column") has the name of one of the dataModel's columns, it creates a TableColumn
+	 * and sets its width at 300.
+	 * @param Column - the name of the column of which size you're trying to set
+	 */
 	public void setColumnsSize(String Column) {
 		for (int i = 0; i < header.length; i++) {
 			if (dataModel.getColumnName(i) == Column) {
