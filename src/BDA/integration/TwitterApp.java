@@ -45,7 +45,7 @@ public class TwitterApp  {
 				counterTotal++;
 //            }
             
-    		System.out.println("-------------\nNº of Results: " + counter+"/"+counterTotal);
+    		System.out.println("-------------\nNï¿½ of Results: " + counter+"/"+counterTotal);
         } catch (Exception e) { System.out.println(e.getMessage()); }
      }
 	
@@ -57,7 +57,7 @@ public class TwitterApp  {
 	 * @param sender - who shared the message.
 	 * @param source -  - where the message was obtained from.
 	 */
-	private void addTweet(String message, String type, String sender, String source){
+	public void addTweet(String message, String type, String sender, String source){
 		Table_line tweet = new Table_line(message, type, sender, source);
 		tweets.add(tweet);
 	}

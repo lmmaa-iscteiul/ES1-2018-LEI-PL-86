@@ -25,6 +25,8 @@ public class Window {
 
 	public static final Window WINDOW_INSTANCE = new Window();
 	private JFrame frame;
+	
+
 	private JPanel right_panel;
 	private JPanel left_panel;
 	private JPanel buttons_panel;
@@ -73,6 +75,162 @@ public class Window {
 				messages[row][col] = (String) string;
 			}
 		};
+	}
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JPanel getRight_panel() {
+		return right_panel;
+	}
+
+	public void setRight_panel(JPanel right_panel) {
+		this.right_panel = right_panel;
+	}
+
+	public JPanel getLeft_panel() {
+		return left_panel;
+	}
+
+	public void setLeft_panel(JPanel left_panel) {
+		this.left_panel = left_panel;
+	}
+
+	public JPanel getButtons_panel() {
+		return buttons_panel;
+	}
+
+	public void setButtons_panel(JPanel buttons_panel) {
+		this.buttons_panel = buttons_panel;
+	}
+
+	public JPanel getTitles_panel() {
+		return titles_panel;
+	}
+
+	public void setTitles_panel(JPanel titles_panel) {
+		this.titles_panel = titles_panel;
+	}
+
+	public JPanel getSources_panel() {
+		return sources_panel;
+	}
+
+	public void setSources_panel(JPanel sources_panel) {
+		this.sources_panel = sources_panel;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public JButton getButton_new() {
+		return button_new;
+	}
+
+	public void setButton_new(JButton button_new) {
+		this.button_new = button_new;
+	}
+
+	public JButton getButton_synchronize() {
+		return button_synchronize;
+	}
+
+	public void setButton_synchronize(JButton button_synchronize) {
+		this.button_synchronize = button_synchronize;
+	}
+
+	public JCheckBox getFacebook() {
+		return facebook;
+	}
+
+	public void setFacebook(JCheckBox facebook) {
+		this.facebook = facebook;
+	}
+
+	public JCheckBox getGmail() {
+		return gmail;
+	}
+
+	public void setGmail(JCheckBox gmail) {
+		this.gmail = gmail;
+	}
+
+	public JCheckBox getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(JCheckBox twitter) {
+		this.twitter = twitter;
+	}
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+
+	public void setScroll(JScrollPane scroll) {
+		this.scroll = scroll;
+	}
+
+	public JLabel getTitle() {
+		return title;
+	}
+
+	public void setTitle(JLabel title) {
+		this.title = title;
+	}
+
+	public JLabel getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(JLabel subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public DefaultTableModel getDataModel() {
+		return dataModel;
+	}
+
+	public void setDataModel(DefaultTableModel dataModel) {
+		this.dataModel = dataModel;
+	}
+
+	public String[] getHeader() {
+		return header;
+	}
+
+	public void setHeader(String[] header) {
+		this.header = header;
+	}
+
+	public String[][] getMessages() {
+		return messages;
+	}
+
+	public void setMessages(String[][] messages) {
+		this.messages = messages;
+	}
+
+	public TwitterApp getTwitter_app() {
+		return twitter_app;
+	}
+
+	public void setTwitter_app(TwitterApp twitter_app) {
+		this.twitter_app = twitter_app;
+	}
+
+	public void setSelectedBoxes(List<String> selectedBoxes) {
+		this.selectedBoxes = selectedBoxes;
 	}
 
 	/**
