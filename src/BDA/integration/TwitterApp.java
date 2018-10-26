@@ -17,6 +17,9 @@ public class TwitterApp  {
 	
 	List<Table_line> tweets = new ArrayList<Table_line>();
 		
+	/**
+	 * The method that finds and adds the wanted tweets to a List of Table_line objects.
+	 */
 	public TwitterApp(){
 		try {
         	ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -46,11 +49,23 @@ public class TwitterApp  {
         } catch (Exception e) { System.out.println(e.getMessage()); }
      }
 	
+	/**
+	 * Adds a Table_line object (a tweet) to the List of tweets.
+	 * <p>The object is composed by four Strings: a message, a type, a sender, and a source.
+	 * @param message - the shared message/content.
+	 * @param type - the message's type.
+	 * @param sender - who shared the message.
+	 * @param source -  - where the message was obtained from.
+	 */
 	private void addTweet(String message, String type, String sender, String source){
 		Table_line tweet = new Table_line(message, type, sender, source);
 		tweets.add(tweet);
 	}
 	
+	/**
+	 * Gets a List of the most recent tweets posted by '@ISCTEIUL' in the form of Table_line objects.
+	 * @return a List of Table_line objects (the tweets).
+	 */
 	public List<Table_line> getTweets(){	
 		return tweets;		
 	}
