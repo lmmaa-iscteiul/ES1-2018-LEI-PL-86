@@ -46,25 +46,25 @@ public class WindowTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-//		 twitter_app = new TwitterApp();
-//		 twitter_app = new TwitterApp();
-//		 frame = new JFrame("Bom Dia Academia");
-//		 title = new JLabel("BOM DIA ACADEMIA");
-//		 subtitle = new JLabel("ISCTE");
-//		 titles_panel = new JPanel();
-//		 right_panel = new JPanel();
-//		 table = new JTable(dataModel);
-//		 scroll = new JScrollPane(table);
-//		 left_panel = new JPanel();
-//		 button_new = new JButton("NEW");
-//		 button_synchronize = new JButton("SYNCHRONIZE");
-//		 buttons_panel = new JPanel();
-//		 sources_panel = new JPanel();
-//		 facebook = new JCheckBox("Facebook");
-//		 gmail = new JCheckBox("Gmail");
-//		 twitter = new JCheckBox("Twitter");
-		 
-//		assertTrue(WINDOW_INSTANCE != null);
+		// twitter_app = new TwitterApp();
+		// twitter_app = new TwitterApp();
+		// frame = new JFrame("Bom Dia Academia");
+		// title = new JLabel("BOM DIA ACADEMIA");
+		// subtitle = new JLabel("ISCTE");
+		// titles_panel = new JPanel();
+		// right_panel = new JPanel();
+		// table = new JTable(dataModel);
+		// scroll = new JScrollPane(table);
+		// left_panel = new JPanel();
+		// button_new = new JButton("NEW");
+		// button_synchronize = new JButton("SYNCHRONIZE");
+		// buttons_panel = new JPanel();
+		// sources_panel = new JPanel();
+		// facebook = new JCheckBox("Facebook");
+		// gmail = new JCheckBox("Gmail");
+		// twitter = new JCheckBox("Twitter");
+
+		// assertTrue(WINDOW_INSTANCE != null);
 
 	}
 
@@ -82,10 +82,10 @@ public class WindowTest {
 	public void testFillTableRow() throws Exception {
 		Table_line tl = new Table_line("message", "type", "sender", "source");
 		WINDOW_INSTANCE.fillTableRow(tl);
-        assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 0) == "message");
-        assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 1) == "type");
-        assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 2) == "sender");
-        assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 3) == "source");
+		assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 0) == "message");
+		assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 1) == "type");
+		assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 2) == "sender");
+		assertTrue(WINDOW_INSTANCE.getDataModel().getValueAt(0, 3) == "source");
 
 	}
 
