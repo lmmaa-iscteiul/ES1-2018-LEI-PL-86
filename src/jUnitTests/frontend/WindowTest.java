@@ -1,5 +1,6 @@
 package frontend;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class WindowTest {
 	public static String[][] messages = new String[50][100];
 	public static List<String> selectedBoxes = new ArrayList<String>();
 	public static TwitterApp twitter_app;
+	public int next;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -63,14 +65,18 @@ public class WindowTest {
 		// facebook = new JCheckBox("Facebook");
 		// gmail = new JCheckBox("Gmail");
 		// twitter = new JCheckBox("Twitter");
+<<<<<<< HEAD
+=======
 
 		// assertTrue(WINDOW_INSTANCE != null);
+>>>>>>> branch 'master' of https://github.com/lmmaa-iscteiul/ES1-2018-LEI-PL-86.git
 
 	}
 
 	@Test
 	public void testGet_window_instance() throws Exception {
 		assertTrue(WINDOW_INSTANCE.get_window_instance() != null);
+		next = WINDOW_INSTANCE.nextRowAvailable();
 	}
 
 	@Test
@@ -91,17 +97,33 @@ public class WindowTest {
 
 	@Test
 	public void testNextRowAvailable() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		int aux = WINDOW_INSTANCE.nextRowAvailable();
+		assertFalse(aux == next);
 	}
 
 	@Test
 	public void testGetSelectedBoxes() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		WINDOW_INSTANCE.getFacebook().setSelected(true);
+		List<String> list = WINDOW_INSTANCE.getSelectedBoxes();
+		for (int i = 0; i < list.size(); i++) {
+			switch (list.get(i)) {
+			case "facebook":
+				assertTrue(facebook.isSelected());
+				break;
+			case "twitter":
+				assertFalse(twitter.isSelected());
+				break;
+			case "gmail":
+				assertFalse(gmail.isSelected());
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	@Test
 	public void testSetColumnsSize() throws Exception {
-		throw new RuntimeException("not yet implemented");
 	}
 
 }
