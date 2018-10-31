@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -25,7 +26,6 @@ public class Window {
 
 	public static final Window WINDOW_INSTANCE = new Window();
 	private JFrame frame;
-	
 
 	private JPanel right_panel;
 	private JPanel left_panel;
@@ -49,9 +49,13 @@ public class Window {
 
 	/**
 	 * Creates and initiates a TwitterApp instance named 'twitter_app'.
-	 * <p>The twitter_app gets the most recent ISCTE-IUL's tweets from their twitter account to the dataModel table.
-	 * <p>Creates and initiates a DefaultTableModel instance named 'dataModel'.
-	 * <p>The dataModel table displays the information about ISCTE-IUL to the user.
+	 * <p>
+	 * The twitter_app gets the most recent ISCTE-IUL's tweets from their twitter
+	 * account to the dataModel table.
+	 * <p>
+	 * Creates and initiates a DefaultTableModel instance named 'dataModel'.
+	 * <p>
+	 * The dataModel table displays the information about ISCTE-IUL to the user.
 	 */
 	public Window() {
 
@@ -76,7 +80,7 @@ public class Window {
 			}
 		};
 	}
-	
+
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -234,7 +238,8 @@ public class Window {
 	}
 
 	/**
-	 * Creates and shows the frame/window that the user will be seeing and interacting with.
+	 * Creates and shows the frame/window that the user will be seeing and
+	 * interacting with.
 	 */
 	public void start_window() {
 
@@ -342,9 +347,14 @@ public class Window {
 	}
 
 	/**
-	 * Fills the next available dataModel's row with a new message, along with its type, sender, and source.
-	 * <p> It gets the message's information it needs from the provided Table_line object 'line'.
-	 * @param line - the provided Table_line object.
+	 * Fills the next available dataModel's row with a new message, along with its
+	 * type, sender, and source.
+	 * <p>
+	 * It gets the message's information it needs from the provided Table_line
+	 * object 'line'.
+	 * 
+	 * @param line
+	 *            - the provided Table_line object.
 	 */
 	public void fillTableRow(Table_line line) {
 		int row = nextRowAvailable();
@@ -367,10 +377,13 @@ public class Window {
 			}
 		}
 	}
-	
+
 	/**
-	 * Tells you which is the next available tableModel's row to add a new message to.
-	 * @return the next available row to add a new message to (as an integer); or returns null if the tableModel is full.
+	 * Tells you which is the next available tableModel's row to add a new message
+	 * to.
+	 * 
+	 * @return the next available row to add a new message to (as an integer); or
+	 *         returns null if the tableModel is full.
 	 */
 	public int nextRowAvailable() {
 		for (int i = 0; i < messages.length; i++) {
@@ -378,12 +391,13 @@ public class Window {
 				return i;
 			}
 		}
-		// não me lembro como fazer exit -.-
 		return (Integer) null;
 	}
 
 	/**
-	 * Checks which of the check boxes are selected, and returns a list of Strings with the names of those that are.
+	 * Checks which of the check boxes are selected, and returns a list of Strings
+	 * with the names of those that are.
+	 * 
 	 * @return a list of Strings with the name of the check boxes that are selected.
 	 */
 	public List<String> getSelectedBoxes() {
@@ -395,11 +409,13 @@ public class Window {
 			selectedBoxes.add("gmail");
 		return selectedBoxes;
 	}
-	
+
 	/**
-	 * If the given string (parameter "Column") has the name of one of the dataModel's columns, it creates a TableColumn
-	 * and sets its width at 300.
-	 * @param Column - the name of the column of which size you're trying to set
+	 * If the given string (parameter "Column") has the name of one of the
+	 * dataModel's columns, it creates a TableColumn and sets its width at 300.
+	 * 
+	 * @param Column
+	 *            - the name of the column of which size you're trying to set
 	 */
 	public void setColumnsSize(String Column) {
 		for (int i = 0; i < header.length; i++) {
