@@ -65,11 +65,6 @@ public class WindowTest {
 		// facebook = new JCheckBox("Facebook");
 		// gmail = new JCheckBox("Gmail");
 		// twitter = new JCheckBox("Twitter");
-<<<<<<< HEAD
-=======
-
-		// assertTrue(WINDOW_INSTANCE != null);
->>>>>>> branch 'master' of https://github.com/lmmaa-iscteiul/ES1-2018-LEI-PL-86.git
 
 	}
 

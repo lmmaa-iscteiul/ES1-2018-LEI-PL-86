@@ -1,9 +1,12 @@
 package frontend;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -32,6 +36,7 @@ public class Window {
 	private JPanel buttons_panel;
 	private JPanel titles_panel;
 	private JPanel sources_panel;
+	private JPanel search_panel;
 	private JTable table;
 	private JButton button_new;
 	private JButton button_synchronize;
@@ -39,6 +44,8 @@ public class Window {
 	private JCheckBox gmail;
 	private JCheckBox twitter;
 	private JScrollPane scroll;
+	private JTextField searchTextField;
+	private JButton searchBtn;
 	private JLabel title;
 	private JLabel subtitle;
 	private DefaultTableModel dataModel;
@@ -267,7 +274,7 @@ public class Window {
 
 		// left_panel
 		left_panel = new JPanel();
-		left_panel.setLayout(new GridLayout(5, 1));
+		left_panel.setLayout(new GridLayout(6, 1));
 		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
 		// Painel dos buttons no left_panel
@@ -306,7 +313,7 @@ public class Window {
 			}
 		});
 
-		// Painel das checkboxes das fontes de informação no left_panel
+		// Painel das checkboxes das fontes de informaï¿½ï¿½o no left_panel
 		sources_panel = new JPanel();
 		sources_panel.setLayout(new GridLayout(3, 1));
 		sources_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
@@ -317,7 +324,36 @@ public class Window {
 		sources_panel.add(gmail);
 		sources_panel.add(twitter);
 		left_panel.add(sources_panel);
-
+		
+		//Painel da pesquisa: TextBox + Button
+		search_panel = new JPanel();
+		search_panel.setLayout(new GridLayout(1, 2));
+		search_panel.setBorder(BorderFactory.createEmptyBorder(25,0,0,0));
+		searchTextField = new JTextField("Search for keywords");
+		searchTextField.setForeground(Color.GRAY);
+		searchTextField.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (searchTextField.getText().isEmpty()) {
+					searchTextField.setForeground(Color.GRAY);
+					searchTextField.setText("Search for keywords");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (searchTextField.getText().equals("Search for keywords")) {
+					searchTextField.setForeground(Color.BLACK);
+					searchTextField.setText("");
+				}
+			}
+		});
+		searchBtn = new JButton("Search");
+		search_panel.add(searchTextField);
+		search_panel.add(searchBtn);
+		left_panel.add(search_panel);
+		
 		frame.add(left_panel);
 		frame.add(right_panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -329,7 +365,7 @@ public class Window {
 		// Table_line line = new Table_line("triggered ", "testededed", "luis",
 		// "facebook");
 		// fillTableRow(line);
-		// Table_line line1 = new Table_line("please work", "informação", "pedro",
+		// Table_line line1 = new Table_line("please work", "informaï¿½ï¿½o", "pedro",
 		// "twitter");
 		// fillTableRow(line1);
 		// //
