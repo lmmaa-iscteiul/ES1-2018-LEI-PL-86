@@ -49,7 +49,6 @@ public class Window {
 	private Table_model dataModel;
 	private String[] header = { "Message", "Type", "Sender", "Source" };
 	private List<String> selectedBoxes = new ArrayList<String>();
-	private JTextField search_field;
 	private Server server = new Server();
 
 	/**
@@ -80,11 +79,6 @@ public class Window {
 		this.facebook = new JCheckBox("Facebook");
 		this.gmail = new JCheckBox("Gmail");
 		this.twitter = new JCheckBox("Twitter");
-		this.search_field = new JTextField();
-	}
-
-	public JTextField getSearch_field() {
-		return search_field;
 	}
 
 	public Server getServer() {
@@ -158,7 +152,6 @@ public class Window {
 		buttons_panel.add(button_synchronize);
 		left_panel.add(titles_panel);
 		left_panel.add(buttons_panel);
-		left_panel.add(search_field);
 
 		button_synchronize.addActionListener(new ActionListener() {
 			@Override
@@ -183,9 +176,7 @@ public class Window {
 						break;
 					}
 				}
-				server.getTaskList().createTasks(search_field.getText());
-				while (!(server.AllWorkersAreDone())) {
-				}
+				server.getTaskList().createTasks(" ");
 				table.updateUI();
 			}
 		});
@@ -197,15 +188,15 @@ public class Window {
 		sources_panel.add(gmail);
 		sources_panel.add(twitter);
 		left_panel.add(sources_panel);
-		
-		//Painel da pesquisa: TextBox + Button
+
+		// Painel da pesquisa: TextBox + Button
 		search_panel = new JPanel();
 		search_panel.setLayout(new GridLayout(1, 2));
-		search_panel.setBorder(BorderFactory.createEmptyBorder(25,0,0,0));
+		search_panel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
 		searchTextField = new JTextField("Search for keywords");
 		searchTextField.setForeground(Color.GRAY);
 		searchTextField.addFocusListener(new FocusListener() {
-			
+
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (searchTextField.getText().isEmpty()) {
@@ -213,7 +204,7 @@ public class Window {
 					searchTextField.setText("Search for keywords");
 				}
 			}
-			
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (searchTextField.getText().equals("Search for keywords")) {
@@ -223,16 +214,46 @@ public class Window {
 			}
 		});
 		searchBtn = new JButton("Search");
+		searchBtn.addActionListener(new ActionListener() {
+			@Override
+			public synchronized void actionPerformed(ActionEvent e) {
+				server.getResultsList().clear();
+				server.getUnreadLines().clear();
+				table.updateUI();
+				getSelectedBoxes();
+				for (int i = 0; i < selectedBoxes.size(); i++) {
+					switch (selectedBoxes.get(i)) {
+					case "gmail":
+						break;
+					case "facebook":
+						break;
+					case "twitter":
+						List<Table_line> tweets = new ArrayList<Table_line>();
+						tweets = server.getTwitter().getTweets();
+						for (Table_line line : server.getTwitter().getTweets()) {
+							server.fillUnreadLines(line);
+						}
+					default:
+						break;
+					}
+				}
+				server.getTaskList().createTasks(searchTextField.getText());
+				while (!(server.AllWorkersAreDone())) {
+				}
+				table.updateUI();
+			}
+		});
 		search_panel.add(searchTextField);
 		search_panel.add(searchBtn);
 		left_panel.add(search_panel);
-		
+
 		frame.add(left_panel);
 		frame.add(right_panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 		frame.setVisible(true);
 		frame.pack();
+	}
 
 	public static Window get_window_instance() {
 		return WINDOW_INSTANCE;
