@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -167,8 +168,6 @@ public class Window {
 					case "facebook":
 						break;
 					case "twitter":
-						List<Table_line> tweets = new ArrayList<Table_line>();
-						tweets = server.getTwitter().getTweets();
 						for (Table_line line : server.getTwitter().getTweets()) {
 							server.fillUnreadLines(line);
 						}
@@ -218,25 +217,7 @@ public class Window {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				server.getResultsList().clear();
-				server.getUnreadLines().clear();
 				table.updateUI();
-				getSelectedBoxes();
-				for (int i = 0; i < selectedBoxes.size(); i++) {
-					switch (selectedBoxes.get(i)) {
-					case "gmail":
-						break;
-					case "facebook":
-						break;
-					case "twitter":
-						List<Table_line> tweets = new ArrayList<Table_line>();
-						tweets = server.getTwitter().getTweets();
-						for (Table_line line : server.getTwitter().getTweets()) {
-							server.fillUnreadLines(line);
-						}
-					default:
-						break;
-					}
-				}
 				server.getTaskList().createTasks(searchTextField.getText());
 				while (!(server.AllWorkersAreDone())) {
 				}
