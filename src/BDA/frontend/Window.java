@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -122,12 +123,17 @@ public class Window {
 	 * interacting with.
 	 */
 	public void start_window() {
-
+		table.getTableHeader().setBackground(new Color(0, 115, 204));
+		table.setBackground(new Color(255, 255, 255));
+		table.setSelectionBackground(Color.BLUE);
 		frame.setLayout(new GridLayout(0, 2));
+		button_synchronize.setBackground(new Color(0, 115, 204));
+		button_new.setBackground(new Color(0, 115, 204));
 
 		// Titulo e subtitulo do left_panel
 
 		titles_panel.setLayout(new GridLayout(2, 1));
+		titles_panel.setBackground(Color.WHITE);
 		title.setFont(title.getFont().deriveFont(40.0f));
 		subtitle.setFont(subtitle.getFont().deriveFont(20, 25.6f));
 		titles_panel.add(title);
@@ -136,17 +142,20 @@ public class Window {
 		// right_panel
 
 		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
+		right_panel.setBackground(Color.WHITE);
 
 		right_panel.add(scroll);
 
 		// left_panel
 		left_panel = new JPanel();
+		left_panel.setBackground(Color.white);
 		left_panel.setLayout(new GridLayout(6, 1));
 		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
 		// Painel dos buttons no left_panel
 
 		buttons_panel.setLayout(new GridLayout(2, 1));
+		buttons_panel.setBackground(Color.white);
 		buttons_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
 		buttons_panel.add(button_new);
 		buttons_panel.add(button_synchronize);
@@ -167,8 +176,6 @@ public class Window {
 					case "facebook":
 						break;
 					case "twitter":
-						List<Table_line> tweets = new ArrayList<Table_line>();
-						tweets = server.getTwitter().getTweets();
 						for (Table_line line : server.getTwitter().getTweets()) {
 							server.fillUnreadLines(line);
 						}
@@ -187,10 +194,12 @@ public class Window {
 		sources_panel.add(facebook);
 		sources_panel.add(gmail);
 		sources_panel.add(twitter);
+		sources_panel.setBackground(Color.WHITE);
 		left_panel.add(sources_panel);
 
 		// Painel da pesquisa: TextBox + Button
 		search_panel = new JPanel();
+		search_panel.setBackground(Color.white);
 		search_panel.setLayout(new GridLayout(1, 2));
 		search_panel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
 		searchTextField = new JTextField("Search for keywords");
@@ -218,25 +227,7 @@ public class Window {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				server.getResultsList().clear();
-				server.getUnreadLines().clear();
 				table.updateUI();
-				getSelectedBoxes();
-				for (int i = 0; i < selectedBoxes.size(); i++) {
-					switch (selectedBoxes.get(i)) {
-					case "gmail":
-						break;
-					case "facebook":
-						break;
-					case "twitter":
-						List<Table_line> tweets = new ArrayList<Table_line>();
-						tweets = server.getTwitter().getTweets();
-						for (Table_line line : server.getTwitter().getTweets()) {
-							server.fillUnreadLines(line);
-						}
-					default:
-						break;
-					}
-				}
 				server.getTaskList().createTasks(searchTextField.getText());
 				while (!(server.AllWorkersAreDone())) {
 				}
