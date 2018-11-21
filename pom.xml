@@ -52,13 +52,8 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
-			<version>1.0.0.RC2</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-facebook -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-facebook</artifactId>
 			<version>1.0.0.M2</version>
 		</dependency>
+
 	</dependencies>
 </project>
