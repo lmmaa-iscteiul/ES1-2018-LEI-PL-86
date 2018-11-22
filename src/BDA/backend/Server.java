@@ -17,8 +17,19 @@ public class Server {
 	private LinkedList<Worker> workers;
 	private LinkedList<Table_line> resultsList;
 
+<<<<<<< HEAD
 	static Logger log = LogManager.getLogger(TwitterApp.class);
 
+=======
+	/**
+	 * Initiates a TwitterApp object.
+	 * <p>
+	 * Initiates a Task_list object.
+	 * <p>
+	 * Creates five (5) Worker objects, adds them to a LinkedList of Workers, and starts running them.
+	 * 
+	 */
+>>>>>>> 27834ba3069d3adb9c1bc30c5b87e2ab58e50016
 	public Server() {
 		this.twitter = new TwitterApp();
 		this.taskList = new Task_list();
@@ -66,6 +77,10 @@ public class Server {
 		unreadLines.add(line);
 	}
 
+	/**
+	 * Tells you if all the Workers are working/occupied or not.
+	 * @return true or false
+	 */
 	public boolean AllWorkersAreDone() {
 		int CountWaiting = 0;
 		for (Worker worker : workers) {
