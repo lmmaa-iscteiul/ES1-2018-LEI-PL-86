@@ -1,0 +1,3 @@
+INFO  | 2018-11-21 23:19:44 | [main] integration.TwitterApp (TwitterApp.java:61) - Teste testes teste
+INFO  | 2018-11-21 23:20:15 | [main] integration.TwitterApp (TwitterApp.java:61) - Teste testes teste
+ERROR | 2018-11-21 23:20:51 | [main] integration.TwitterApp (TwitterApp.java:61) - Teste testes teste

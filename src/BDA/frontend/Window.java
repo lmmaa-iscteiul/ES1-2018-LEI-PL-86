@@ -1,9 +1,12 @@
 package frontend;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,22 +19,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import integration.TwitterApp;
+import backend.Server;
 
 public class Window {
 
 	public static final Window WINDOW_INSTANCE = new Window();
 	private JFrame frame;
-
 	private JPanel right_panel;
 	private JPanel left_panel;
 	private JPanel buttons_panel;
 	private JPanel titles_panel;
 	private JPanel sources_panel;
+	private JPanel search_panel;
 	private JTable table;
 	private JButton button_new;
 	private JButton button_synchronize;
@@ -39,202 +43,40 @@ public class Window {
 	private JCheckBox gmail;
 	private JCheckBox twitter;
 	private JScrollPane scroll;
+	private JTextField searchTextField;
+	private JButton searchBtn;
 	private JLabel title;
 	private JLabel subtitle;
-	private DefaultTableModel dataModel;
+	private Table_model dataModel;
 	private String[] header = { "Message", "Type", "Sender", "Source" };
-	private String[][] messages = new String[50][100];
 	private List<String> selectedBoxes = new ArrayList<String>();
-	private TwitterApp twitter_app;
+	private Server server = new Server();
 
 	/**
-	 * Creates and initiates a TwitterApp instance named 'twitter_app'.
-	 * <p>
-	 * The twitter_app gets the most recent ISCTE-IUL's tweets from their twitter
-	 * account to the dataModel table.
-	 * <p>
-	 * Creates and initiates a DefaultTableModel instance named 'dataModel'.
-	 * <p>
-	 * The dataModel table displays the information about ISCTE-IUL to the user.
+	 * Initiates the component's of the UI window.
 	 */
 	public Window() {
 
-		this.twitter_app = new TwitterApp();
-
-		this.dataModel = new DefaultTableModel(messages, header) {
-			public int getColumnCount() {
-				return 4;
-			}
-
-			public int getRowCount() {
-				return 10000;
-			}
-
-			public Object getValueAt(int row, int col) {
-				return messages[row][col];
-			}
-
-			@Override
-			public void setValueAt(Object string, int row, int col) {
-				messages[row][col] = (String) string;
-			}
-		};
+		this.dataModel = new Table_model(server.getResultsList(), header);
+		this.table = new JTable(dataModel);
+		this.frame = new JFrame("Bom Dia Academia");
+		this.title = new JLabel("BOM DIA ACADEMIA");
+		this.subtitle = new JLabel("ISCTE");
+		this.titles_panel = new JPanel();
+		this.right_panel = new JPanel();
+		this.scroll = new JScrollPane(table);
+		this.left_panel = new JPanel();
+		this.button_new = new JButton("NEW");
+		this.button_synchronize = new JButton("SYNCHRONIZE");
+		this.buttons_panel = new JPanel();
+		this.sources_panel = new JPanel();
+		this.facebook = new JCheckBox("Facebook");
+		this.gmail = new JCheckBox("Gmail");
+		this.twitter = new JCheckBox("Twitter");
 	}
 
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
-
-	public JPanel getRight_panel() {
-		return right_panel;
-	}
-
-	public void setRight_panel(JPanel right_panel) {
-		this.right_panel = right_panel;
-	}
-
-	public JPanel getLeft_panel() {
-		return left_panel;
-	}
-
-	public void setLeft_panel(JPanel left_panel) {
-		this.left_panel = left_panel;
-	}
-
-	public JPanel getButtons_panel() {
-		return buttons_panel;
-	}
-
-	public void setButtons_panel(JPanel buttons_panel) {
-		this.buttons_panel = buttons_panel;
-	}
-
-	public JPanel getTitles_panel() {
-		return titles_panel;
-	}
-
-	public void setTitles_panel(JPanel titles_panel) {
-		this.titles_panel = titles_panel;
-	}
-
-	public JPanel getSources_panel() {
-		return sources_panel;
-	}
-
-	public void setSources_panel(JPanel sources_panel) {
-		this.sources_panel = sources_panel;
-	}
-
-	public JTable getTable() {
-		return table;
-	}
-
-	public void setTable(JTable table) {
-		this.table = table;
-	}
-
-	public JButton getButton_new() {
-		return button_new;
-	}
-
-	public void setButton_new(JButton button_new) {
-		this.button_new = button_new;
-	}
-
-	public JButton getButton_synchronize() {
-		return button_synchronize;
-	}
-
-	public void setButton_synchronize(JButton button_synchronize) {
-		this.button_synchronize = button_synchronize;
-	}
-
-	public JCheckBox getFacebook() {
-		return facebook;
-	}
-
-	public void setFacebook(JCheckBox facebook) {
-		this.facebook = facebook;
-	}
-
-	public JCheckBox getGmail() {
-		return gmail;
-	}
-
-	public void setGmail(JCheckBox gmail) {
-		this.gmail = gmail;
-	}
-
-	public JCheckBox getTwitter() {
-		return twitter;
-	}
-
-	public void setTwitter(JCheckBox twitter) {
-		this.twitter = twitter;
-	}
-
-	public JScrollPane getScroll() {
-		return scroll;
-	}
-
-	public void setScroll(JScrollPane scroll) {
-		this.scroll = scroll;
-	}
-
-	public JLabel getTitle() {
-		return title;
-	}
-
-	public void setTitle(JLabel title) {
-		this.title = title;
-	}
-
-	public JLabel getSubtitle() {
-		return subtitle;
-	}
-
-	public void setSubtitle(JLabel subtitle) {
-		this.subtitle = subtitle;
-	}
-
-	public DefaultTableModel getDataModel() {
-		return dataModel;
-	}
-
-	public void setDataModel(DefaultTableModel dataModel) {
-		this.dataModel = dataModel;
-	}
-
-	public String[] getHeader() {
-		return header;
-	}
-
-	public void setHeader(String[] header) {
-		this.header = header;
-	}
-
-	public String[][] getMessages() {
-		return messages;
-	}
-
-	public void setMessages(String[][] messages) {
-		this.messages = messages;
-	}
-
-	public TwitterApp getTwitter_app() {
-		return twitter_app;
-	}
-
-	public void setTwitter_app(TwitterApp twitter_app) {
-		this.twitter_app = twitter_app;
-	}
-
-	public void setSelectedBoxes(List<String> selectedBoxes) {
-		this.selectedBoxes = selectedBoxes;
+	public Server getServer() {
+		return server;
 	}
 
 	/**
@@ -242,39 +84,39 @@ public class Window {
 	 * interacting with.
 	 */
 	public void start_window() {
-
-		frame = new JFrame("Bom Dia Academia");
+		table.getTableHeader().setBackground(new Color(0, 115, 204));
+		table.setBackground(new Color(255, 255, 255));
+		table.setSelectionBackground(Color.BLUE);
 		frame.setLayout(new GridLayout(0, 2));
+		button_synchronize.setBackground(new Color(0, 115, 204));
+		button_new.setBackground(new Color(0, 115, 204));
 
 		// Titulo e subtitulo do left_panel
-		title = new JLabel("BOM DIA ACADEMIA");
-		subtitle = new JLabel("ISCTE");
-		titles_panel = new JPanel();
+
 		titles_panel.setLayout(new GridLayout(2, 1));
+		titles_panel.setBackground(Color.WHITE);
 		title.setFont(title.getFont().deriveFont(40.0f));
 		subtitle.setFont(subtitle.getFont().deriveFont(20, 25.6f));
 		titles_panel.add(title);
 		titles_panel.add(subtitle);
 
 		// right_panel
-		right_panel = new JPanel();
-		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
-		table = new JTable(dataModel);
-		scroll = new JScrollPane(table);
+		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
+		right_panel.setBackground(Color.WHITE);
+
 		right_panel.add(scroll);
-		setColumnsSize("Message");
 
 		// left_panel
 		left_panel = new JPanel();
-		left_panel.setLayout(new GridLayout(5, 1));
+		left_panel.setBackground(Color.white);
+		left_panel.setLayout(new GridLayout(6, 1));
 		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
 		// Painel dos buttons no left_panel
-		button_new = new JButton("NEW");
-		button_synchronize = new JButton("SYNCHRONIZE");
-		buttons_panel = new JPanel();
+
 		buttons_panel.setLayout(new GridLayout(2, 1));
+		buttons_panel.setBackground(Color.white);
 		buttons_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
 		buttons_panel.add(button_new);
 		buttons_panel.add(button_synchronize);
@@ -284,6 +126,10 @@ public class Window {
 		button_synchronize.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
+				server.getResultsList().clear();
+
+				server.getUnreadLines().clear();
+				table.updateUI();
 				getSelectedBoxes();
 				for (int i = 0; i < selectedBoxes.size(); i++) {
 					switch (selectedBoxes.get(i)) {
@@ -292,31 +138,69 @@ public class Window {
 					case "facebook":
 						break;
 					case "twitter":
-						List<Table_line> tweets = new ArrayList<Table_line>();
-						tweets = twitter_app.getTweets();
-						for (int j = 0; j < tweets.size(); j++) {
-							fillTableRow(tweets.get(j));
+						for (Table_line line : server.getTwitter().getTweets()) {
+							server.fillUnreadLines(line);
 						}
-						table.updateUI();
 					default:
 						break;
 					}
 				}
-
+				server.getTaskList().createTasks(" ");
+				table.updateUI();
 			}
 		});
-
-		// Painel das checkboxes das fontes de informação no left_panel
+		// Painel das checkboxes das fontes de informaï¿½ï¿½o no left_panel
 		sources_panel = new JPanel();
 		sources_panel.setLayout(new GridLayout(3, 1));
 		sources_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
-		facebook = new JCheckBox("Facebook");
-		gmail = new JCheckBox("Gmail");
-		twitter = new JCheckBox("Twitter");
 		sources_panel.add(facebook);
+		facebook.setBackground(Color.white);
 		sources_panel.add(gmail);
+		gmail.setBackground(Color.white);
 		sources_panel.add(twitter);
+		twitter.setBackground(Color.white);
+		sources_panel.setBackground(Color.WHITE);
 		left_panel.add(sources_panel);
+
+		// Painel da pesquisa: TextBox + Button
+		search_panel = new JPanel();
+		search_panel.setBackground(Color.white);
+		search_panel.setLayout(new GridLayout(1, 2));
+		search_panel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
+		searchTextField = new JTextField("Search for keywords");
+		searchTextField.setForeground(Color.GRAY);
+		searchTextField.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (searchTextField.getText().isEmpty()) {
+					searchTextField.setForeground(Color.GRAY);
+					searchTextField.setText("Search for keywords");
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (searchTextField.getText().equals("Search for keywords")) {
+					searchTextField.setForeground(Color.BLACK);
+					searchTextField.setText("");
+				}
+			}
+		});
+		searchBtn = new JButton("Search");
+		searchBtn.addActionListener(new ActionListener() {
+			@Override
+			public synchronized void actionPerformed(ActionEvent e) {
+				server.getResultsList().clear();
+				table.updateUI();
+				server.getTaskList().createTasks(searchTextField.getText());
+				while (!(server.AllWorkersAreDone())) {
+				}
+				table.updateUI();
+			}
+		});
+		search_panel.add(searchTextField);
+		search_panel.add(searchBtn);
+		left_panel.add(search_panel);
 
 		frame.add(left_panel);
 		frame.add(right_panel);
@@ -324,22 +208,38 @@ public class Window {
 		frame.setResizable(true);
 		frame.setVisible(true);
 		frame.pack();
+	}
 
-		// // TABLE TESTE!
-		// Table_line line = new Table_line("triggered ", "testededed", "luis",
-		// "facebook");
-		// fillTableRow(line);
-		// Table_line line1 = new Table_line("please work", "informação", "pedro",
-		// "twitter");
-		// fillTableRow(line1);
-		// //
-		// // Teste dos tweets
-		// List<Table_line> tweets = new ArrayList<Table_line>();
-		// tweets = twitter_app.getTweets();
-		// for (int i = 0; i < tweets.size(); i++) {
-		// fillTableRow(tweets.get(i));
-		// }
+	public JButton getButton_new() {
+		return button_new;
+	}
 
+	public JButton getButton_synchronize() {
+		return button_synchronize;
+	}
+
+	public JTextField getSearchTextField() {
+		return searchTextField;
+	}
+
+	public JButton getSearchBtn() {
+		return searchBtn;
+	}
+
+	public JCheckBox getFacebook() {
+		return facebook;
+	}
+
+	public JCheckBox getGmail() {
+		return gmail;
+	}
+
+	public JCheckBox getTwitter() {
+		return twitter;
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 
 	public static Window get_window_instance() {
@@ -347,51 +247,19 @@ public class Window {
 	}
 
 	/**
-	 * Fills the next available dataModel's row with a new message, along with its
-	 * type, sender, and source.
-	 * <p>
-	 * It gets the message's information it needs from the provided Table_line
-	 * object 'line'.
-	 * 
-	 * @param line
-	 *            - the provided Table_line object.
+	 * @return the data model table
 	 */
-	public void fillTableRow(Table_line line) {
-		int row = nextRowAvailable();
-		for (int i = 0; i < header.length; i++) {
-			switch (dataModel.getColumnName(i)) {
-			case "Message":
-				dataModel.setValueAt(line.getMessage(), row, i);
-				break;
-			case "Type":
-				dataModel.setValueAt(line.getType(), row, i);
-				break;
-			case "Sender":
-				dataModel.setValueAt(line.getSender(), row, i);
-				break;
-			case "Source":
-				dataModel.setValueAt(line.getSource(), row, i);
-				break;
-			default:
-				break;
-			}
-		}
+	public Table_model getDataModel() {
+		return dataModel;
 	}
 
 	/**
-	 * Tells you which is the next available tableModel's row to add a new message
-	 * to.
+	 * Sets the data model table as the given object.
 	 * 
-	 * @return the next available row to add a new message to (as an integer); or
-	 *         returns null if the tableModel is full.
+	 * @param dataModel - the data model to be set
 	 */
-	public int nextRowAvailable() {
-		for (int i = 0; i < messages.length; i++) {
-			if (messages[i][0] == null) {
-				return i;
-			}
-		}
-		return (Integer) null;
+	public void setDataModel(Table_model dataModel) {
+		this.dataModel = dataModel;
 	}
 
 	/**
@@ -410,24 +278,9 @@ public class Window {
 		return selectedBoxes;
 	}
 
-	/**
-	 * If the given string (parameter "Column") has the name of one of the
-	 * dataModel's columns, it creates a TableColumn and sets its width at 300.
-	 * 
-	 * @param Column
-	 *            - the name of the column of which size you're trying to set
-	 */
-	public void setColumnsSize(String Column) {
-		for (int i = 0; i < header.length; i++) {
-			if (dataModel.getColumnName(i) == Column) {
-				TableColumn tableColumn = table.getTableHeader().getColumnModel().getColumn(i);
-				tableColumn.setPreferredWidth(300);
-			}
-		}
-	}
-
-	public static void main(String[] args) {
-		Window.get_window_instance().start_window();
+	public static void main(String args[]) {
+		Window window = WINDOW_INSTANCE;
+		window.start_window();
 	}
 
 }
