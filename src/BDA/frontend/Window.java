@@ -81,7 +81,7 @@ public class Window {
 	public void start_window() {
 		table.getTableHeader().setBackground(new Color(0, 115, 204));
 		table.setBackground(new Color(255, 255, 255));
-		table.setSelectionBackground(Color.BLUE);
+		table.setSelectionBackground(Color.LIGHT_GRAY);
 		frame.setLayout(new GridLayout(0, 2));
 		button_synchronize.setBackground(new Color(0, 115, 204));
 		button_new.setBackground(new Color(0, 115, 204));
@@ -264,6 +264,7 @@ public class Window {
 	 * @return a list of Strings with the name of the check boxes that are selected.
 	 */
 	public List<String> getSelectedBoxes() {
+		selectedBoxes.clear();
 		if (facebook.isSelected())
 			selectedBoxes.add("facebook");
 		if (twitter.isSelected())
