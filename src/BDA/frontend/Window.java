@@ -157,8 +157,11 @@ public class Window {
 		sources_panel.setLayout(new GridLayout(3, 1));
 		sources_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
 		sources_panel.add(facebook);
+		facebook.setBackground(Color.white);
 		sources_panel.add(gmail);
+		twitter.setBackground(Color.white);
 		sources_panel.add(twitter);
+		gmail.setBackground(Color.white);
 		sources_panel.setBackground(Color.WHITE);
 		left_panel.add(sources_panel);
 
