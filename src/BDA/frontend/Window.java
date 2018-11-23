@@ -127,7 +127,11 @@ public class Window {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				server.getResultsList().clear();
-				server.getUnreadLines().clear();
+				try {
+					server.getUnreadLines().clear();
+				} catch (Exception e) {
+					log.error("Could not get Unread Lines. More details: " + e.getMessage());
+				}
 				table.updateUI();
 				getSelectedBoxes();
 				for (int i = 0; i < selectedBoxes.size(); i++) {
@@ -248,8 +252,10 @@ public class Window {
 	public Table_model getDataModel() {
 		return dataModel;
 	}
+
 	/**
 	 * Sets the data model table as the given object.
+	 * 
 	 * @param dataModel - the data model to be set
 	 */
 	public void setDataModel(Table_model dataModel) {

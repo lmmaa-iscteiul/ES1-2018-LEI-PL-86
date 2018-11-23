@@ -17,7 +17,6 @@ public class Server {
 	private LinkedList<Worker> workers;
 	private LinkedList<Table_line> resultsList;
 
-
 	static Logger log = LogManager.getLogger(TwitterApp.class);
 
 	/**
@@ -25,7 +24,8 @@ public class Server {
 	 * <p>
 	 * Initiates a Task_list object.
 	 * <p>
-	 * Creates five (5) Worker objects, adds them to a LinkedList of Workers, and starts running them.
+	 * Creates five (5) Worker objects, adds them to a LinkedList of Workers, and
+	 * starts running them.
 	 * 
 	 */
 	public Server() {
@@ -41,16 +41,13 @@ public class Server {
 		}
 	}
 
-	public LinkedList<Table_line> getUnreadLines() {
-		try {			
-			return unreadLines;
-		} catch (Exception e) {
-			// TODO: handle exception
-			log.error("Could not get Unread Lines. More details: " + e.getMessage());
-			return null;
-		}
+	public void setUnreadLines(LinkedList<Table_line> unreadLines) {
+		this.unreadLines = unreadLines;
 	}
 
+	public LinkedList<Table_line> getUnreadLines() throws NullPointerException {
+		return unreadLines;
+	}
 
 	public Task_list getTaskList() {
 		return taskList;
@@ -66,6 +63,7 @@ public class Server {
 
 	/**
 	 * Tells you if all the Workers are working/occupied or not.
+	 * 
 	 * @return true or false
 	 */
 	public boolean AllWorkersAreDone() {
@@ -82,6 +80,10 @@ public class Server {
 			CountWaiting = 0;
 			return false;
 		}
+	}
+
+	public LinkedList<Worker> getWorkers() {
+		return workers;
 	}
 
 	public synchronized LinkedList<Table_line> getResultsList() {
