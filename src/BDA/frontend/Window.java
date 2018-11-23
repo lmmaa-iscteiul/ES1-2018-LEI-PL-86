@@ -79,38 +79,6 @@ public class Window {
 		return server;
 	}
 
-	public static Window getWindowInstance() {
-		return WINDOW_INSTANCE;
-	}
-
-	public JCheckBox getFacebook() {
-		return facebook;
-	}
-
-	public void setFacebook(JCheckBox facebook) {
-		this.facebook = facebook;
-	}
-
-	public JCheckBox getGmail() {
-		return gmail;
-	}
-
-	public void setGmail(JCheckBox gmail) {
-		this.gmail = gmail;
-	}
-
-	public JCheckBox getTwitter() {
-		return twitter;
-	}
-
-	public void setTwitter(JCheckBox twitter) {
-		this.twitter = twitter;
-	}
-
-	public void setSelectedBoxes(List<String> selectedBoxes) {
-		this.selectedBoxes = selectedBoxes;
-	}
-
 	/**
 	 * Creates and shows the frame/window that the user will be seeing and
 	 * interacting with.
@@ -201,7 +169,6 @@ public class Window {
 		searchTextField = new JTextField("Search for keywords");
 		searchTextField.setForeground(Color.GRAY);
 		searchTextField.addFocusListener(new FocusListener() {
-
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (searchTextField.getText().isEmpty()) {
@@ -242,40 +209,41 @@ public class Window {
 		frame.pack();
 	}
 
+	public JButton getButton_new() {
+		return button_new;
+	}
+
+	public JButton getButton_synchronize() {
+		return button_synchronize;
+	}
+
+	public JTextField getSearchTextField() {
+		return searchTextField;
+	}
+
+	public JButton getSearchBtn() {
+		return searchBtn;
+	}
+
+	public JCheckBox getFacebook() {
+		return facebook;
+	}
+
+	public JCheckBox getGmail() {
+		return gmail;
+	}
+
+	public JCheckBox getTwitter() {
+		return twitter;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
 	public static Window get_window_instance() {
 		return WINDOW_INSTANCE;
 	}
-
-	/**
-	 * Fills the next available dataModel's row with a new message, along with its
-	 * type, sender, and source.
-	 * <p>
-	 * It gets the message's information it needs from the provided Table_line
-	 * object 'line'.
-	 * 
-	 * @param line - the provided Table_line object.
-	 */
-//	public void fillTableRow(Table_line line) {
-//		int row = nextRowAvailable();
-//		for (int i = 0; i < header.length; i++) {
-//			switch (dataModel.getColumnName(i)) {
-//			case "Message":
-//				dataModel.setValueAt(line.getMessage(), row, i);
-//				break;
-//			case "Type":
-//				dataModel.setValueAt(line.getType(), row, i);
-//				break;
-//			case "Sender":
-//				dataModel.setValueAt(line.getSender(), row, i);
-//				break;
-//			case "Source":
-//				dataModel.setValueAt(line.getSource(), row, i);
-//				break;
-//			default:
-//				break;
-//			}
-//		}
-//	}
 
 	/**
 	 * @return the data model table
@@ -290,28 +258,6 @@ public class Window {
 	public void setDataModel(Table_model dataModel) {
 		this.dataModel = dataModel;
 	}
-
-//	public void fillResultsTable() {
-//		for (Table_line line : getWindowInstance().getServer().getResultsList()) {
-//			fillTableRow(line);
-//		}
-//	}
-
-	/**
-	 * Tells you which is the next available tableModel's row to add a new message
-	 * to.
-	 * 
-	 * @return the next available row to add a new message to (as an integer); or
-	 *         returns null if the tableModel is full.
-	 */
-//	public int nextRowAvailable() {
-//		for (int i = 0; i < server.getResultsList().size(); i++) {
-//			if (server.getResultsList() == null) {
-//				return i;
-//			}
-//		}
-//		return (Integer) null;
-//	}
 
 	/**
 	 * Checks which of the check boxes are selected, and returns a list of Strings
@@ -328,21 +274,6 @@ public class Window {
 			selectedBoxes.add("gmail");
 		return selectedBoxes;
 	}
-
-	/**
-	 * If the given string (parameter "Column") has the name of one of the
-	 * dataModel's columns, it creates a TableColumn and sets its width at 300.
-	 * 
-	 * @param Column - the name of the column of which size you're trying to set
-	 */
-//	public void setColumnsSize(String Column) {
-//		for (int i = 0; i < header.length; i++) {
-//			if (dataModel.getColumnName(i) == Column) {
-//				TableColumn tableColumn = table.getTableHeader().getColumnModel().getColumn(i);
-//				tableColumn.setPreferredWidth(300);
-//			}
-//		}
-//	}
 
 	public static void main(String args[]) {
 		Window window = WINDOW_INSTANCE;
