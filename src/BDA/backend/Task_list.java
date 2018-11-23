@@ -23,12 +23,19 @@ public class Task_list {
 	}
 
 	public synchronized void createTasks(String palavra) {
-		for (Table_line line : Window.getWindowInstance().getServer().getUnreadLines()) {
+		for (Table_line line : Window.get_window_instance().getServer().getUnreadLines()) {
 			Task task = new Task(palavra, line);
 			tasks.add(task);
 		}
 		notifyAll();
 
+	}
+
+	public boolean isEmpty() {
+		if (tasks.isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 
 }

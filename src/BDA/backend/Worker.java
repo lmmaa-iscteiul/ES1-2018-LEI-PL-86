@@ -12,10 +12,10 @@ public class Worker extends Thread {
 	public void run() {
 		while (true) {
 			isWorking = false;
-			Task task = Window.getWindowInstance().getServer().getTaskList().getTask();
+			Task task = Window.get_window_instance().getServer().getTaskList().getTask();
 			isWorking = true;
 			if (task.getLine().getMessage().split(task.getPalavra()).length > 1) {
-				Window.getWindowInstance().getServer().getResultsList().add(task.getLine());
+				Window.get_window_instance().getServer().getResultsList().add(task.getLine());
 			}
 		}
 

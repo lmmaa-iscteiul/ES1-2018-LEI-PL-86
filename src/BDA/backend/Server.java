@@ -30,24 +30,13 @@ public class Server {
 		return unreadLines;
 	}
 
-	public void setUnread_tasks(LinkedList<Table_line> unread) {
-		this.unreadLines = unread;
-	}
 
 	public Task_list getTaskList() {
 		return taskList;
 	}
 
-	public void setTaskList(Task_list taskList) {
-		this.taskList = taskList;
-	}
-
 	public TwitterApp getTwitter() {
 		return twitter;
-	}
-
-	public void setTwitter(TwitterApp twitter) {
-		this.twitter = twitter;
 	}
 
 	public void fillUnreadLines(Table_line line) {
