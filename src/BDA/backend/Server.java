@@ -45,8 +45,13 @@ public class Server {
 		this.unreadLines = unreadLines;
 	}
 
-	public LinkedList<Table_line> getUnreadLines() throws NullPointerException {
-		return unreadLines;
+	public LinkedList<Table_line> getUnreadLines() {
+		try {
+			return unreadLines;
+		} catch (Exception e) {
+			log.error("Could not get Unread Lines. More details: " + e.getMessage());
+			return null;
+		}
 	}
 
 	public Task_list getTaskList() {
