@@ -1,28 +1,40 @@
 package integration;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import frontend.Table_line;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterApp {
 
 	List<Table_line> tweets = new ArrayList<Table_line>();
+	static Logger log = LogManager.getLogger(TwitterApp.class);
 
 	/**
 	 * The method that finds and adds the wanted tweets to a List of Table_line
 	 * objects.
+	 * 
 	 */
 	public TwitterApp() {
 		try {
+
+			// throw new TwitterException("Teste testes teste");
+
 			ConfigurationBuilder cb = new ConfigurationBuilder();
 			cb.setDebugEnabled(true).setOAuthConsumerKey("W1f0VvgWPfT8OBqVxvy4Mw")
 					.setOAuthConsumerSecret("zKH2yAtRyefwsgOO8h8Szc4kru68iEm95QmIG7svw")
@@ -36,21 +48,24 @@ public class TwitterApp {
 			int counterTotal = 0;
 			for (Status status : statuses) {
 				// Filters only tweets from user "ISCTE - IUL"
-				// if (status.getUser().getName() != null && status.getUser().getScreenName()) {
-				// System.out.println(status.getUser().getName() + ": " + status.getText());
+				// if (status.getUser().getName() != null &&
+				// status.getUser().getScreenName()) {
+				// System.out.println(status.getUser().getName() + ": " +
+				// status.getText());
 				addTweet(status.getText(), "tipo", status.getUser().getScreenName(), "Twitter");
 			}
-			// }
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (TwitterException e) {
+			// System.out.println(e.getMessage());
+//			System.out.println("Apanhei a excepção do twitter");
+			log.error("Could not connect to twitter account. More details: " + e.getMessage());
 		}
 	}
 
 	/**
 	 * Adds a Table_line object (a tweet) to the List of tweets.
 	 * <p>
-	 * The object is composed by four Strings: a message, a type, a sender, and a
-	 * source.
+	 * The object is composed by four Strings: a message, a type, a sender, and
+	 * a source.
 	 * 
 	 * @param message
 	 *            - the shared message/content.
@@ -67,8 +82,8 @@ public class TwitterApp {
 	}
 
 	/**
-	 * Gets a List of the most recent tweets posted by '@ISCTEIUL' in the form of
-	 * Table_line objects.
+	 * Gets a List of the most recent tweets posted by '@ISCTEIUL' in the form
+	 * of Table_line objects.
 	 * 
 	 * @return a List of Table_line objects (the tweets).
 	 */
