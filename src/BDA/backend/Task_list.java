@@ -12,6 +12,10 @@ public class Task_list {
 		this.tasks = new LinkedList<Task>();
 	}
 
+	/**
+	 * 
+	 * @return the first task, if there is one, from the tasks List.
+	 */
 	public synchronized Task getTask() {
 		while (tasks.isEmpty()) {
 			try {
@@ -22,6 +26,10 @@ public class Task_list {
 		return tasks.removeFirst();
 	}
 
+	/**
+	 * Creates Tasks with the specified word as one their parameters.
+	 * @param palavra - the specified word.
+	 */
 	public synchronized void createTasks(String palavra) {
 		for (Table_line line : Window.get_window_instance().getServer().getUnreadLines()) {
 			Task task = new Task(palavra, line);

@@ -53,14 +53,7 @@ public class Window {
 	private Server server = new Server();
 
 	/**
-	 * Creates and initiates a TwitterApp instance named 'twitter_app'.
-	 * <p>
-	 * The twitter_app gets the most recent ISCTE-IUL's tweets from their twitter
-	 * account to the dataModel table.
-	 * <p>
-	 * Creates and initiates a DefaultTableModel instance named 'dataModel'.
-	 * <p>
-	 * The dataModel table displays the information about ISCTE-IUL to the user.
+	 * Initiates the component's of the UI window.
 	 */
 	public Window() {
 
@@ -249,10 +242,16 @@ public class Window {
 		return WINDOW_INSTANCE;
 	}
 
+	/**
+	 * @return the data model table
+	 */
 	public Table_model getDataModel() {
 		return dataModel;
 	}
-
+	/**
+	 * Sets the data model table as the given object.
+	 * @param dataModel - the data model to be set
+	 */
 	public void setDataModel(Table_model dataModel) {
 		this.dataModel = dataModel;
 	}

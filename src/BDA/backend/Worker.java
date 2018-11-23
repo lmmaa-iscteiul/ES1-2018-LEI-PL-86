@@ -21,10 +21,18 @@ public class Worker extends Thread {
 
 	}
 
+	/**
+	 * 
+	 * @return true if the Worker instance is working/occupied with a task.
+	 */
 	public Boolean IsWorking() {
 		return isWorking;
 	}
 
+	/**
+	 * Sets the Worker object's attribute "isWorking" either true or false
+	 * @param isWorking - true or false
+	 */
 	public void setIsWorking(Boolean isWorking) {
 		this.isWorking = isWorking;
 	}

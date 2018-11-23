@@ -45,6 +45,12 @@ public class Table_model extends AbstractTableModel {
 		return header[col];
 	}
 
+	/**
+	 * 
+	 * @param row - row of the wanted value
+	 * @param col - column of the wanted value
+	 * @return the value at a specific position in the table (given by the row and column).
+	 */
 	public String getValueAt(int row, int col) {
 		String temp = null;
 		switch (col) {

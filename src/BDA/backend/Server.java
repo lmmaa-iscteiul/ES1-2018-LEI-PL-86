@@ -1,6 +1,10 @@
 package backend;
 
+import java.io.IOException;
 import java.util.LinkedList;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import frontend.Table_line;
 import integration.TwitterApp;
@@ -13,6 +17,17 @@ public class Server {
 	private LinkedList<Worker> workers;
 	private LinkedList<Table_line> resultsList;
 
+
+	static Logger log = LogManager.getLogger(TwitterApp.class);
+
+	/**
+	 * Initiates a TwitterApp object.
+	 * <p>
+	 * Initiates a Task_list object.
+	 * <p>
+	 * Creates five (5) Worker objects, adds them to a LinkedList of Workers, and starts running them.
+	 * 
+	 */
 	public Server() {
 		this.twitter = new TwitterApp();
 		this.taskList = new Task_list();
@@ -27,7 +42,13 @@ public class Server {
 	}
 
 	public LinkedList<Table_line> getUnreadLines() {
-		return unreadLines;
+		try {			
+			return unreadLines;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error("Could not get Unread Lines. More details: " + e.getMessage());
+			return null;
+		}
 	}
 
 
@@ -43,6 +64,10 @@ public class Server {
 		unreadLines.add(line);
 	}
 
+	/**
+	 * Tells you if all the Workers are working/occupied or not.
+	 * @return true or false
+	 */
 	public boolean AllWorkersAreDone() {
 		int CountWaiting = 0;
 		for (Worker worker : workers) {
