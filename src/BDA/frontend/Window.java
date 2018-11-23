@@ -127,7 +127,7 @@ public class Window {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				server.getResultsList().clear();
-				
+
 				server.getUnreadLines().clear();
 				table.updateUI();
 				getSelectedBoxes();
@@ -154,8 +154,11 @@ public class Window {
 		sources_panel.setLayout(new GridLayout(3, 1));
 		sources_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
 		sources_panel.add(facebook);
+		facebook.setBackground(Color.white);
 		sources_panel.add(gmail);
+		gmail.setBackground(Color.white);
 		sources_panel.add(twitter);
+		twitter.setBackground(Color.white);
 		sources_panel.setBackground(Color.WHITE);
 		left_panel.add(sources_panel);
 
@@ -249,8 +252,10 @@ public class Window {
 	public Table_model getDataModel() {
 		return dataModel;
 	}
+
 	/**
 	 * Sets the data model table as the given object.
+	 * 
 	 * @param dataModel - the data model to be set
 	 */
 	public void setDataModel(Table_model dataModel) {
