@@ -58,6 +58,11 @@ public class TwitterApp {
 
 	}
 	
+	/**
+	 * Posts a given tweet on your Twitter account
+	 * @param message the content of the tweet
+	 * @throws TwitterException when the app can't connect to the account or the tweeting doesn't work
+	 */
 	public void postTweet(String message) throws TwitterException {
 		stat = twitter.updateStatus(message);
 		log.debug("Successfully updated status to " + stat.getText());

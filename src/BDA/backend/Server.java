@@ -43,7 +43,11 @@ public class Server {
 			worker.start();
 		}
 	}
-
+	
+	/**
+	 * Posts a given tweet on your Twitter account
+	 * @param message the content of the tweet
+	 */
 	public void postTweet(String message){
 		try {
 			twitter.postTweet(message);
