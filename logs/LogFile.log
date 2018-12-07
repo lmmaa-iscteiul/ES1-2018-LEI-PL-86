@@ -1,3 +1,67 @@
 INFO  | 2018-11-21 23:19:44 | [main] integration.TwitterApp (TwitterApp.java:61) - Teste testes teste
 INFO  | 2018-11-21 23:20:15 | [main] integration.TwitterApp (TwitterApp.java:61) - Teste testes teste
 ERROR | 2018-11-21 23:20:51 | [main] integration.TwitterApp (TwitterApp.java:61) - Teste testes teste
+ERROR | 2018-12-07 20:55:26 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:06:54 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:07:12 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:08:23 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:11:05 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:11:23 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:12:27 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:13:05 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:14:20 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:18:17 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:18:44 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:19:30 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:19:38 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 21:20:14 | [main] integration.TwitterApp (TwitterApp.java:80) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 22:38:57 | [main] integration.TwitterApp (TwitterApp.java:108) - Could not connect to twitter account. More details: 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following).
+message - Status is a duplicate.
+code - 187
+
+ERROR | 2018-12-07 22:54:48 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com
+ERROR | 2018-12-07 22:54:48 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com
+ERROR | 2018-12-07 23:04:25 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com
+ERROR | 2018-12-07 23:04:25 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com

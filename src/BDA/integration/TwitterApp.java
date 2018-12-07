@@ -11,6 +11,7 @@ import java.util.ListIterator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Test;
 
 import frontend.Table_line;
 
@@ -24,41 +25,42 @@ public class TwitterApp {
 
 	List<Table_line> tweets = new ArrayList<Table_line>();
 	static Logger log = LogManager.getLogger(TwitterApp.class);
-
+	Status stat;
+	
+	TwitterFactory tf;
+	Twitter twitter;
 	/**
 	 * The method that finds and adds the wanted tweets to a List of Table_line
 	 * objects.
 	 * 
 	 */
+
 	public TwitterApp() {
 		try {
-
-			// throw new TwitterException("Teste testes teste");
-
 			ConfigurationBuilder cb = new ConfigurationBuilder();
-			cb.setDebugEnabled(true).setOAuthConsumerKey("W1f0VvgWPfT8OBqVxvy4Mw")
-					.setOAuthConsumerSecret("zKH2yAtRyefwsgOO8h8Szc4kru68iEm95QmIG7svw")
-					.setOAuthAccessToken("36481851-VhzByC4f9MSsZES1QZQ4e4iBvA9bWGLyv9HKFpy7c")
-					.setOAuthAccessTokenSecret("OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po");
-			TwitterFactory tf = new TwitterFactory(cb.build());
-			Twitter twitter = tf.getInstance();
+			cb.setDebugEnabled(true).setOAuthConsumerKey("nPV5ykycJGJn63UlppNasKKKH")
+					.setOAuthConsumerSecret("lM6nvuydU3PGkUc5qaRqjhj0hd1LhU6Nzn5SMKWYhIdTy3Riao")
+					.setOAuthAccessToken("1053600037043879938-zoCbbpECD52XraIEjmsC98RONQSfA0")
+					.setOAuthAccessTokenSecret("WK17lfyHv0G7JG8yjll69pIr6K8yzt3Ja89o9hHGuNUvd");
+			tf = new TwitterFactory(cb.build());
+			twitter = tf.getInstance();
 			List<Status> statuses = twitter.getUserTimeline("ISCTEIUL");
 			System.out.println("------------------------\n Showing home timeline \n------------------------");
 			int counter = 0;
 			int counterTotal = 0;
 			for (Status status : statuses) {
-				// Filters only tweets from user "ISCTE - IUL"
-				// if (status.getUser().getName() != null &&
-				// status.getUser().getScreenName()) {
-				// System.out.println(status.getUser().getName() + ": " +
-				// status.getText());
 				addTweet(status.getText(), "tipo", status.getUser().getScreenName(), "Twitter");
 			}
+
 		} catch (TwitterException e) {
-			// System.out.println(e.getMessage());
-//			System.out.println("Apanhei a excepção do twitter");
 			log.error("Could not connect to twitter account. More details: " + e.getMessage());
 		}
+
+	}
+	
+	public void postTweet(String message) throws TwitterException {
+		stat = twitter.updateStatus(message);
+		log.debug("Successfully updated status to " + stat.getText());
 	}
 
 	/**
