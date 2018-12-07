@@ -65,3 +65,4 @@ ERROR | 2018-12-07 22:54:48 | [main] integration.TwitterApp (TwitterApp.java:107
 ERROR | 2018-12-07 22:54:48 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com
 ERROR | 2018-12-07 23:04:25 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com
 ERROR | 2018-12-07 23:04:25 | [main] integration.TwitterApp (TwitterApp.java:107) - Could not connect to twitter account. More details: api.twitter.com
+ERROR | 2018-12-07 23:46:33 | [main] integration.TwitterApp (TwitterApp.java:56) - Could not connect to twitter account. More details: Connection reset

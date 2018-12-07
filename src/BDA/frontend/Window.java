@@ -7,11 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -103,7 +107,6 @@ public class Window {
 		subtitle.setFont(subtitle.getFont().deriveFont(20, 25.6f));
 		titles_panel.add(title);
 		titles_panel.add(subtitle);
-
 		// right_panel
 
 		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
