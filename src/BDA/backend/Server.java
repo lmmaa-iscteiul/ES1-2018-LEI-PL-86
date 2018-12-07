@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import frontend.Table_line;
 import integration.TwitterApp;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 public class Server {
 
@@ -40,7 +43,19 @@ public class Server {
 			worker.start();
 		}
 	}
-
+	
+	/**
+	 * Posts a given tweet on your Twitter account
+	 * @param message the content of the tweet
+	 */
+	public void postTweet(String message){
+		try {
+			twitter.postTweet(message);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void setUnreadLines(LinkedList<Table_line> unreadLines) {
 		this.unreadLines = unreadLines;
 	}

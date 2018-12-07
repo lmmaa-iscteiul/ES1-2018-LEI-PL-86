@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import backend.Server;
+import integration.TwitterApp;
 
 public class Window {
 
@@ -31,6 +32,7 @@ public class Window {
 	private JPanel titles_panel;
 	private JPanel sources_panel;
 	private JPanel search_panel;
+	private JPanel twetting_panel;
 	private JTable table;
 	private JButton button_new;
 	private JButton button_synchronize;
@@ -39,6 +41,7 @@ public class Window {
 	private JCheckBox twitter;
 	private JScrollPane scroll;
 	private JTextField searchTextField;
+	public JTextField twetting_textField;
 	private JButton searchBtn;
 	private JLabel title;
 	private JLabel subtitle;
@@ -46,6 +49,7 @@ public class Window {
 	private String[] header = { "Message", "Type", "Sender", "Source" };
 	private List<String> selectedBoxes = new ArrayList<String>();
 	private Server server = new Server();
+	private TwitterApp twitterapp = new TwitterApp();
 
 	/**
 	 * Initiates the component's of the UI window.
@@ -109,7 +113,6 @@ public class Window {
 		left_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 
 		// Painel dos buttons no left_panel
-
 		buttons_panel.setLayout(new GridLayout(2, 1));
 		buttons_panel.setBackground(Color.white);
 		buttons_panel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
@@ -118,6 +121,43 @@ public class Window {
 		left_panel.add(titles_panel);
 		left_panel.add(buttons_panel);
 
+		// Caixa texto para tweetar
+		twetting_panel = new JPanel();
+		twetting_panel.setBackground(Color.white);
+		twetting_panel.setLayout(new GridLayout(1, 1));
+		twetting_panel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
+		twetting_textField = new JTextField("What do you wish to tweet?");
+		twetting_textField.setForeground(Color.GRAY);
+		twetting_textField.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (twetting_textField.getText().isEmpty()) {
+					twetting_textField.setForeground(Color.GRAY);
+					twetting_textField.setText("What do you wish to tweet?");
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (twetting_textField.getText().equals("What do you wish to tweet?")) {
+					twetting_textField.setForeground(Color.BLACK);
+					twetting_textField.setText("");
+				}
+			}
+		});
+		
+		button_new.addActionListener(new ActionListener() {
+			@Override
+			public synchronized void actionPerformed(ActionEvent e) {
+				String mensagem = twetting_textField.getText();
+				server.postTweet(mensagem);
+			}
+		});
+
+		twetting_panel.add(twetting_textField);
+		left_panel.add(twetting_panel);
+
+		// Syncronize button
 		button_synchronize.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
@@ -251,17 +291,19 @@ public class Window {
 	/**
 	 * Sets the data model table as the given object.
 	 * 
-	 * @param dataModel - the data model to be set
+	 * @param dataModel
+	 *            - the data model to be set
 	 */
 	public void setDataModel(Table_model dataModel) {
 		this.dataModel = dataModel;
 	}
 
 	/**
-	 * Checks which of the check boxes are selected, and returns a list of Strings
-	 * with the names of those that are.
+	 * Checks which of the check boxes are selected, and returns a list of
+	 * Strings with the names of those that are.
 	 * 
-	 * @return a list of Strings with the name of the check boxes that are selected.
+	 * @return a list of Strings with the name of the check boxes that are
+	 *         selected.
 	 */
 	public List<String> getSelectedBoxes() {
 		selectedBoxes.clear();
