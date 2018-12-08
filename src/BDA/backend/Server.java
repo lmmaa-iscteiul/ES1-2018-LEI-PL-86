@@ -1,6 +1,5 @@
 package backend;
 
-import java.io.IOException;
 import java.util.LinkedList;
 
 import org.apache.logging.log4j.LogManager;
@@ -8,8 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import frontend.Table_line;
 import integration.TwitterApp;
-import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 public class Server {

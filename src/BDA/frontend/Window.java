@@ -2,21 +2,16 @@ package frontend;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -27,7 +22,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import backend.Server;
-import integration.TwitterApp;
 
 public class Window {
 
@@ -48,7 +42,7 @@ public class Window {
 	private JCheckBox twitter;
 	private JScrollPane scroll;
 	private JTextField searchTextField;
-	public JTextField twetting_textField;
+	private JTextField twetting_textField;
 	private JButton searchBtn;
 	private JLabel title;
 	private JLabel subtitle;
@@ -57,7 +51,8 @@ public class Window {
 	private String[] header = { "Message", "Type", "Sender", "Source" };
 	private List<String> selectedBoxes = new ArrayList<String>();
 	private Server server = new Server();
-	private TwitterApp twitterapp = new TwitterApp();
+	private Timer timer;
+	private TimerTask task;
 
 	/**
 	 * Initiates the component's of the UI window.
@@ -80,6 +75,7 @@ public class Window {
 		this.facebook = new JCheckBox("Facebook");
 		this.gmail = new JCheckBox("Gmail");
 		this.twitter = new JCheckBox("Twitter");
+		this.timer = new Timer();
 	}
 
 	public Server getServer() {
@@ -99,7 +95,6 @@ public class Window {
 		button_new.setBackground(new Color(0, 115, 204));
 
 		// Titulo e subtitulo do left_panel
-
 		titles_panel.setLayout(new GridLayout(3, 1));
 		titles_panel.setBackground(Color.WHITE);
 		title.setFont(title.getFont().deriveFont(40.0f));
@@ -110,7 +105,6 @@ public class Window {
 		// right_panel
 		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 		right_panel.setBackground(Color.WHITE);
-
 		right_panel.add(scroll);
 
 		// left_panel
@@ -152,15 +146,35 @@ public class Window {
 				}
 			}
 		});
-
+		//New Button
 		button_new.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				String mensagem = twetting_textField.getText();
+				timer = new Timer();
 				if(!mensagem.equals(defaultTweetMessage)){
+					task = new TimerTask() {		
+						@Override
+						public void run() {
+							twetting_textField.setBackground(Color.white);
+							twetting_textField.setForeground(Color.GRAY);
+							twetting_textField.setText(defaultTweetMessage);
+						}
+					};
 					server.postTweet(mensagem);
-					twetting_textField.setForeground(Color.GRAY);
-					twetting_textField.setText(defaultTweetMessage);	
+					twetting_textField.setBackground(Color.green);
+					timer.schedule(task, 1000);
+						
+				}
+				else{
+					task = new TimerTask() {		
+						@Override
+						public void run() {
+							twetting_textField.setBackground(Color.white);					
+						}
+					};
+					twetting_textField.setBackground(Color.red);
+					timer.schedule(task, 1000);
 				}
 			}
 		});
