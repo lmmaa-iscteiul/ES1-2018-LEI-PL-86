@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -63,6 +65,8 @@ public class Window {
 	private List<String> selectedBoxes = new ArrayList<String>();
 	private Server server = new Server();
 	private TwitterApp twitterapp = new TwitterApp();
+	private Timer timer;
+	private TimerTask task;
 
 	/**
 	 * Initiates the component's of the UI window.
@@ -162,10 +166,30 @@ public class Window {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				String mensagem = twetting_textField.getText();
+				timer = new Timer();
 				if(!mensagem.equals(defaultTweetMessage)){
+					task = new TimerTask() {		
+						@Override
+						public void run() {
+							twetting_textField.setBackground(Color.white);
+							twetting_textField.setForeground(Color.GRAY);
+							twetting_textField.setText(defaultTweetMessage);
+						}
+					};
 					server.postTweet(mensagem);
-					twetting_textField.setForeground(Color.GRAY);
-					twetting_textField.setText(defaultTweetMessage);	
+					twetting_textField.setBackground(Color.green);
+					timer.schedule(task, 1000);
+						
+				}
+				else{
+					task = new TimerTask() {		
+						@Override
+						public void run() {
+							twetting_textField.setBackground(Color.white);					
+						}
+					};
+					twetting_textField.setBackground(Color.red);
+					timer.schedule(task, 1000);
 				}
 			}
 		});
