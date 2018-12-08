@@ -2,14 +2,21 @@ package frontend;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -46,6 +53,7 @@ public class Window {
 	private JLabel title;
 	private JLabel subtitle;
 	private Table_model dataModel;
+	private String defaultTweetMessage = "What do you wish to tweet?";
 	private String[] header = { "Message", "Type", "Sender", "Source" };
 	private List<String> selectedBoxes = new ArrayList<String>();
 	private Server server = new Server();
@@ -82,7 +90,7 @@ public class Window {
 	 * Creates and shows the frame/window that the user will be seeing and
 	 * interacting with.
 	 */
-	public void start_window() {
+	public void start_window(){
 		table.getTableHeader().setBackground(new Color(0, 115, 204));
 		table.setBackground(new Color(255, 255, 255));
 		table.setSelectionBackground(Color.LIGHT_GRAY);
@@ -92,7 +100,7 @@ public class Window {
 
 		// Titulo e subtitulo do left_panel
 
-		titles_panel.setLayout(new GridLayout(2, 1));
+		titles_panel.setLayout(new GridLayout(3, 1));
 		titles_panel.setBackground(Color.WHITE);
 		title.setFont(title.getFont().deriveFont(40.0f));
 		subtitle.setFont(subtitle.getFont().deriveFont(20, 25.6f));
@@ -100,7 +108,6 @@ public class Window {
 		titles_panel.add(subtitle);
 
 		// right_panel
-
 		right_panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 20, 15));
 		right_panel.setBackground(Color.WHITE);
 
@@ -126,31 +133,35 @@ public class Window {
 		twetting_panel.setBackground(Color.white);
 		twetting_panel.setLayout(new GridLayout(1, 1));
 		twetting_panel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
-		twetting_textField = new JTextField("What do you wish to tweet?");
+		twetting_textField = new JTextField(defaultTweetMessage);
 		twetting_textField.setForeground(Color.GRAY);
 		twetting_textField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (twetting_textField.getText().isEmpty()) {
 					twetting_textField.setForeground(Color.GRAY);
-					twetting_textField.setText("What do you wish to tweet?");
+					twetting_textField.setText(defaultTweetMessage);	
 				}
 			}
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (twetting_textField.getText().equals("What do you wish to tweet?")) {
+				if (twetting_textField.getText().equals(defaultTweetMessage)) {
 					twetting_textField.setForeground(Color.BLACK);
 					twetting_textField.setText("");
 				}
 			}
 		});
-		
+
 		button_new.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
 				String mensagem = twetting_textField.getText();
-				server.postTweet(mensagem);
+				if(!mensagem.equals(defaultTweetMessage)){
+					server.postTweet(mensagem);
+					twetting_textField.setForeground(Color.GRAY);
+					twetting_textField.setText(defaultTweetMessage);	
+				}
 			}
 		});
 
